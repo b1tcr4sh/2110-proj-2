@@ -11,25 +11,25 @@ void FacilityChain::appendToList(Facility* fac) {
         }
 }
 
-Facility* FacilityChain::removeFromList(Facility* fac) {
+void FacilityChain::removeFromList(Facility* fac) {
     Facility* temp = head;
 
     if (temp == NULL) {
         // list is empty
         cout << "list is empty, cannot remove" << endl;
-        return NULL;
+        return;
     }
     
     if (temp->id == fac->id) { // if the element we're looking to remove is the head,
         if (temp->next != NULL) { // and if the list is not only one element long,
             head = temp->next; // then, set the head to the predecessor of the element we're looking for
             temp->next = NULL; // and exclude it from the list
-            return temp; // then we can return it
+            delete temp; // then we can delete it
         } else { // otherwise, the head (and tail) is the only element in the list
             temp->next = NULL; // se we exclude it from the list
             head = NULL; // and deinitialize the list by making the head null
             tail = NULL;  // and the tail
-            return temp; // then we can return the removed element
+            delete temp; // then we can delete it
         }
 
     }
@@ -41,14 +41,13 @@ Facility* FacilityChain::removeFromList(Facility* fac) {
                 temp->next = temp->next->next; // then it has a predecessor, and we can repair the reference
             } 
             fac->next = NULL; // and regardless, the found element should not point into the list
-            return fac; // then we can return it, so it can be pushed onto the stack
+            delete fac; // then we can delete it
         }
 
         temp = temp->next; // iterate through elements
     } 
 
     cout << fac->id << " not found in list..." << endl;
-    return NULL;
 }
 
 Facility* FacilityChain::LinearSearch(string id) {

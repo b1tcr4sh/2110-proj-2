@@ -9,7 +9,7 @@ class FacilityChain { // wrapper for linked list
 
         void appendToList(Facility* fac); // append to the list
         Facility* LinearSearch(string id); // finds based on key (for chained elements)
-        Facility* removeFromList(Facility* fac); // helper function to remove from the list
+        void removeFromList(Facility* fac); // helper function to remove from the list
     private:
         Facility* head;
         Facility* tail;
