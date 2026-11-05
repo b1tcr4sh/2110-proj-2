@@ -1,0 +1,6 @@
+.vscode
+.vs
+a.out
+*.gch
+*.o
+proj1.out
