@@ -1,8 +1,15 @@
 #include "CampusGraph.h"
 #include <iostream>
 #include <fstream>
+#include <algorithm>
+#include <cctype>
 
 using namespace std;
+string toLowerCase(string text) {
+    transform(text.begin(), text.end(), text.begin(),
+        [](unsigned char c) { return tolower(c); });
+    return text;
+}
 
 void CampusGraph::addBuilding(const string& buildingID) {
 
@@ -19,11 +26,11 @@ bool CampusGraph::addConnection(const string& building1, const string& building2
     
     for (int i = 0; i < buildings.size(); i++) {
 
-        if (buildings[i] == building1) {
+        if (toLowerCase(buildings[i]) == toLowerCase(building1)) {
             index1 = i;
         }
 
-        if (buildings[i] == building2) {
+        if (toLowerCase(buildings[i]) == toLowerCase(building2)) {
             index2 = i;
         }
     }
@@ -55,8 +62,13 @@ void CampusGraph::displayGraph() const {
 
         cout << buildings[i] << " connects to: ";
 
-        for (int neighbor : adjacencyList[i]) {
-            cout << buildings[neighbor] << " ";
+        if (adjacencyList[i].empty()) {
+            cout << "(no connections)";
+        }
+        else {
+            for (int neighbor : adjacencyList[i]) {
+                cout << buildings[neighbor] << " ";
+            }
         }
 
         cout << endl;
@@ -90,35 +102,30 @@ void CampusGraph::displayStatistics() const {
 
 void CampusGraph::breadthFirstSearch(const string& startBuilding) const {
 
-    
     int startIndex = -1;
 
     for (int i = 0; i < buildings.size(); i++) {
-        if (buildings[i] == startBuilding) {
+        if (toLowerCase(buildings[i]) == toLowerCase(startBuilding)) {
             startIndex = i;
             break;
         }
     }
 
-    
     if (startIndex == -1) {
         cout << "Building not found.\n";
         return;
     }
 
-    
     vector<bool> visited(buildings.size(), false);
-
-    
     vector<int> distance(buildings.size(), -1);
 
-    
     queue<int> q;
 
-    
     visited[startIndex] = true;
     distance[startIndex] = 0;
     q.push(startIndex);
+
+    int reachableCount = 0;
 
     cout << "\n===== BFS REACHABILITY =====\n";
 
@@ -130,7 +137,8 @@ void CampusGraph::breadthFirstSearch(const string& startBuilding) const {
         cout << buildings[current]
             << " - Distance: " << distance[current] << endl;
 
-        
+        reachableCount++;
+
         for (int neighbor : adjacencyList[current]) {
 
             if (!visited[neighbor]) {
@@ -142,6 +150,9 @@ void CampusGraph::breadthFirstSearch(const string& startBuilding) const {
             }
         }
     }
+
+    cout << "Reachable buildings: " << reachableCount
+        << " out of " << buildings.size() << endl;
 }
 
 bool CampusGraph::loadBuildings(const string& filename) {
@@ -182,7 +193,7 @@ bool CampusGraph::loadBuildings(const string& filename) {
         bool duplicate = false;
 
         for (const string& building : buildings) {
-            if (building == line) {
+            if (toLowerCase(building) == toLowerCase(line)) {
                 duplicate = true;
                 break;
             }
