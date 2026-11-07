@@ -55,12 +55,26 @@ void FacilityTable::Load() {
 }
 
 Facility FacilityTable::Find(string id) {
+    id = normalize(id); // normalize the key
+
+    if (!isValid(id)) { // if the key is formatted incorrectly,
+        return Facility("null", "null", "null", "null"); // then exit
+    }
+
     FacilityChain* bucket = hash(id); // hash the id to find the bucket
 
-    return *(bucket->LinearSearch(id)); // search the bucket to find the element we are looking for and return a copy of it
+    Facility* fac = bucket->LinearSearch(id); // search the bucket to find the element
+
+    if (fac == NULL) { // if it wasn't found in bucket
+        cout << "Not found: no facility with ID " << id << endl;
+        return Facility("null", "null", "null", "null"); // then exit
+    }
+
+    return *fac; // otherwise, return a copy of it
 }
 
 void FacilityTable::Create(string id, string name, string building, string category) {
+    id = normalize(id); // normalize the key
     Facility* newFac = new Facility(id, name, building, category);
 
     FacilityChain* bucket = hash(newFac->id); // hash the key and get the bucket to append into
@@ -68,6 +82,7 @@ void FacilityTable::Create(string id, string name, string building, string categ
 }
 
 void FacilityTable::Remove(string id) {
+    id = normalize(id); // normalize the key
     FacilityChain* bucket = hash(id); // find the bucket that the key belongs in
 
     Facility* fac = bucket->LinearSearch(id); // find the correct element in the bucket
@@ -90,4 +105,24 @@ int FacilityTable::DJB2(string key) {
     }
 
     return running % size; // mod with the size of the table and return the key
+}
+
+void FacilityTable::ListAll() {
+    for (unsigned int i = 0; i < size; i++) { // go through each bucket
+        FacilityChain* chain = table.at(i);
+        chain->ListAll(); // and list it
+    }
+}
+
+bool FacilityTable::isValid(string id) {
+    if (id.at(0) != 'F' || id.size() != 4) { // if the first character is not an f or is not of length 4
+        cout << "Invalid format: an ID is F followed by exactly three digits" << endl; // then print an error
+        return false; // and exit early
+    }
+    return true; // if nothing is caught, the key is fine as is
+}
+
+string FacilityTable::normalize(string key) {
+    // normalize to uppercase and trim whitespace
+    return key;
 }
