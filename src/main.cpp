@@ -70,6 +70,8 @@ void PrintMenu() {
 }
 
 int main() {
+    // need to handle Accept an optional command-line argument naming the data directory (for example, ./campus testdata/case1). If it is omitted, use data/.
+
     int input;
     bool cont = true;
     while (cont) { // loop until program end; makes sure that user gets prompted with a new menu after each operaiton
