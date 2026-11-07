@@ -118,7 +118,7 @@ int FacilityTable::DJB2(string key) {
 }
 
 void FacilityTable::ListAll() {
-    for (unsigned int i = 0; i < size; i++) { // go through each bucket
+    for (int i = 0; i < size; i++) { // go through each bucket
         FacilityChain* chain = table.at(i);
         chain->ListAll(); // and list it
     }
