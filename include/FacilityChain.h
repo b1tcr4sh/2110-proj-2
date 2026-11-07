@@ -10,6 +10,7 @@ class FacilityChain { // wrapper for linked list
         void appendToList(Facility* fac); // append to the list
         Facility* LinearSearch(string id); // finds based on key (for chained elements)
         void removeFromList(Facility* fac); // helper function to remove from the list
+        void ListAll(); // list all elements in the chain
     private:
         Facility* head;
         Facility* tail;
