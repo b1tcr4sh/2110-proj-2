@@ -1,8 +1,8 @@
 #include <fstream>
-#include <sstream>
 #include <iostream>
 #include <vector>
 #include "../include/FacilityTable.h"
+#include "../include/Files.h"
 
 FacilityTable::FacilityTable(int size) {
     this->size = size;
@@ -12,46 +12,45 @@ FacilityTable::FacilityTable(int size) {
     }
 }
 
-void FacilityTable::Load() {
-    ifstream file("data/facilities.txt");
+void FacilityTable::Load(string filename) {
+    ifstream file(filename);
 
-    if (file.bad() || file.fail()) {
-        cout << "Warning: File \"data/facilities.txt\" failed to open." << endl;
+    if (file.bad() || file.fail() || !file.is_open()) {
+        cout << "Warning: File \"" << filename << "\" failed to open." << endl;
         return; // exit early
     }
-    int lineNumber = 1; // count lines for error handling
+
+    string line;
+    int lineNumber = 0; // count lines for error handling
+    int loaded = 0; // count the amount of loaded entries
+    int rejected = 0; // count the amount of rejected entries
     
     
-    while (!file.eof()) {
-        string line;
-        getline(file, line); // read 1 line from file
+    while (getline(file, line)) { // read each line from file
+        vector<string> tokens = Files::processFileLine(line, "|", lineNumber); // prcocess the line into tokens
 
-        if (line.find("#") || line == "") {
-            continue; // this line is either a comment or an empty line, so we can disregard it
+        if (tokens.size() == 0) { // if line is either empty or is a comment
+            continue; // skip it
         }
 
-        //split line into tokens
-        stringstream stream(line);
-
-        string id;
-        getline(stream, id, '|');
-
-        string name;
-        getline(stream, name, '|');
-
-        string building;
-        getline(stream, building, '|');
-
-        string category;
-        getline(stream, category, '|');
-
-        if (!line.empty()) {
-            cout << "Warning: File \"data/facilities.txt\" contained incorrect formatting. Too many fields were provided." << endl;
-            continue;
+        if (tokens.size() != 4) { // if there are not 4 tokens, the formatting is incorrect
+            cout << "Malformed Line: " << filename << " line " << lineNumber << ": incorrect number or format of tokens." << endl;
+            continue; // skip it
         }
 
-        lineNumber++;
+        string id = tokens.at(0); // the first token (it will get normalized)
+        string name = Files::trim(tokens.at(0)); // the trimmed second token
+        string building = Files::trim(tokens.at(0)); // the trimmed third token
+        string category = Files::trim(tokens.at(0)); // the  trimmed forth token
+
+        if (Create(id, name, building, category)) loaded++; // if it is succesfully created and added to the table, then incremend the number of loaded records
+        else rejected++; // otherwise, increment the number of rejected records
     }
+
+    cout << endl << "===== FACILITY LOAD SUMMARY =====" << endl;
+    cout << "File: " << filename << endl;
+    cout << "Facilities loaded: " << loaded << endl;
+    cout << "Facilities rejected: " << rejected << endl;
 }
 
 Facility FacilityTable::Find(string id) {
@@ -73,12 +72,23 @@ Facility FacilityTable::Find(string id) {
     return *fac; // otherwise, return a copy of it
 }
 
-void FacilityTable::Create(string id, string name, string building, string category) {
+bool FacilityTable::Create(string id, string name, string building, string category) {
     id = normalize(id); // normalize the key
+
+    if (!isValid(id)) { // if the format of the id is invalid,
+        return false; // then exit early and state rejection
+    }
+
+    if (Find(id).id != "null") { // if we find a record that already has this id,
+        cout << "Duplicate facility id: " << id << endl; // then print an error 
+        return false; // and return early and state rejection
+    }
+
     Facility* newFac = new Facility(id, name, building, category);
 
     FacilityChain* bucket = hash(newFac->id); // hash the key and get the bucket to append into
     bucket->appendToList(newFac); // append to bucket
+    return true;
 }
 
 void FacilityTable::Remove(string id) {
@@ -124,5 +134,7 @@ bool FacilityTable::isValid(string id) {
 
 string FacilityTable::normalize(string key) {
     // normalize to uppercase and trim whitespace
+    key = Files::to_upper(key);
+    key = Files::trim(key);
     return key;
 }

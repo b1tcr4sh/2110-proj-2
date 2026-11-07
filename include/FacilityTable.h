@@ -8,8 +8,8 @@ class FacilityTable { // stores all facilities as a hash table
     public:
         FacilityTable(int size);
 
-        void Load(); // load from file
-        void Create(string id, string name, string building, string category); // insert a new element into the table (this function will actually create the facility)
+        void Load(string filename); // load from file
+        bool Create(string id, string name, string building, string category); // insert a new element into the table (this function will actually create the facility)
         void Remove(string id);
         Facility Find(string id); // find a specific facility; combination of a hashing function and linear search that returns a copy so we don't break the hash table
         void ListAll(); // list every entry in the table
