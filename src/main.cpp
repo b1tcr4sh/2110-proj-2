@@ -7,6 +7,10 @@ using namespace std;
 CampusGraph BuildingGraph;
 FacilityTable FacilityHashTable(10); // initialize the hash table for storing facility information with a size parameter
 
+void graphBFS() {
+
+}
+
 void searchFacilityById() {
     string id;
     cout << endl << "ID > ";
@@ -27,10 +31,13 @@ bool HandleInut(int input) {
             searchFacilityById();
             return true;
         case 3: // view campus graph
+            BuildingGraph.displayGraph();
             return true;
         case 4: // display graph counts and degrees
+            BuildingGraph.displayStatistics();
             return true;
         case 5: // BFS
+            graphBFS();
             return true;
         case 6: // add department
             return true;
@@ -43,6 +50,7 @@ bool HandleInut(int input) {
         case 10: // exit
             return false;
         default: // unhandeled input
+            cout << "input not recognized: " << input << endl;
             return true;
     }
 }
