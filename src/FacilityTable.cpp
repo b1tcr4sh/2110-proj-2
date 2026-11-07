@@ -84,7 +84,7 @@ FacilityChain* FacilityTable::hash(string id) {
 int FacilityTable::DJB2(string key) {
     int running = startingValue; // start with the constant starting value
 
-    for (int i = 0; i < key.size(); i++) { // for each character in the key,
+    for (unsigned int i = 0; i < key.size(); i++) { // for each character in the key,
         running *= multiplier; // multiply by the constant multiplier
         running += key.at(i); // add the ASCII value of the current char
     }

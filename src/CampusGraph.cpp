@@ -24,7 +24,7 @@ bool CampusGraph::addConnection(const string& building1, const string& building2
     int index2 = -1;
 
     
-    for (int i = 0; i < buildings.size(); i++) {
+    for (unsigned int i = 0; i < buildings.size(); i++) {
 
         if (toLowerCase(buildings[i]) == toLowerCase(building1)) {
             index1 = i;
@@ -58,7 +58,7 @@ void CampusGraph::displayGraph() const {
 
     cout << "\n===== CAMPUS GRAPH =====\n";
 
-    for (int i = 0; i < buildings.size(); i++) {
+    for (unsigned int i = 0; i < buildings.size(); i++) {
 
         cout << buildings[i] << " connects to: ";
 
@@ -85,7 +85,7 @@ void CampusGraph::displayStatistics() const {
     int totalConnections = 0;
 
     
-    for (int i = 0; i < buildings.size(); i++) {
+    for (unsigned int i = 0; i < buildings.size(); i++) {
 
         int degree = adjacencyList[i].size();
 
@@ -104,7 +104,7 @@ void CampusGraph::breadthFirstSearch(const string& startBuilding) const {
 
     int startIndex = -1;
 
-    for (int i = 0; i < buildings.size(); i++) {
+    for (unsigned int i = 0; i < buildings.size(); i++) {
         if (toLowerCase(buildings[i]) == toLowerCase(startBuilding)) {
             startIndex = i;
             break;
