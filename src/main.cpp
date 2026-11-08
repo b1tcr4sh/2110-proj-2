@@ -71,6 +71,9 @@ void PrintMenu() {
 
 int main() {
     // need to handle Accept an optional command-line argument naming the data directory (for example, ./campus testdata/case1). If it is omitted, use data/.
+    BuildingGraph.loadBuildings("data/buildings.txt");
+    BuildingGraph.loadConnections("data/connections.txt");
+    FacilityHashTable.Load("data/facilities.txt");
 
     int input;
     bool cont = true;

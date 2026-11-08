@@ -51,6 +51,8 @@ void FacilityChain::removeFromList(Facility* fac) {
 }
 
 Facility* FacilityChain::LinearSearch(string id) {
+    if (head == NULL) return NULL; // if the list is empty, exit early
+
     Facility* temp = head;
 
     do {
