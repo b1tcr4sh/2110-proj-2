@@ -83,7 +83,7 @@ Facility FacilityTable::Find(string id) {
     Facility* fac = bucket->LinearSearch(id); // search the bucket to find the element
 
     if (fac == NULL) { // if it wasn't found in bucket
-        // cout << "Not found: no facility with ID " << id << endl;
+        cout << "Not found: no facility with ID " << id << endl;
         return Facility("null", "null", "null", "null"); // then exit
     }
 
@@ -97,14 +97,15 @@ bool FacilityTable::Create(string id, string name, string building, string categ
         return false; // then exit early and state rejection
     }
 
-    if (Find(id).id != "null") { // if we find a record that already has this id,
-        cout << "Duplicate facility id: " << id << endl; // then print an error 
-        return false; // and return early and state rejection
-    }
-
     Facility* newFac = new Facility(id, name, building, category);
 
     FacilityChain* bucket = hash(newFac->id); // hash the key and get the bucket to append into
+    
+    if (bucket->LinearSearch(id) != NULL) { // if this bucket already contains this id
+        cout << "Duplicate facility id: " << id << endl; // then print an error 
+        return false; // and return early and state rejection
+    }
+    
     bucket->appendToList(newFac); // append to bucket
     return true;
 }

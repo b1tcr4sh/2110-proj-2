@@ -23,8 +23,6 @@ void searchFacilityById() {
         cout << endl << fac.name << ": " << fac.id << endl;
         cout << " Located at: " << fac.building << endl;
         cout << " Category: " << fac.category << endl;
-    } else {
-        cout << "Not found: no facility with ID " << id << endl;
     }
 }
 
