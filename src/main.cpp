@@ -44,8 +44,16 @@ int ParseFieldInputInt(unsigned int length, string input) { // helper function t
 }
 
 void graphBFS() {
+    string startBuilding;
 
+    cout << "\nEnter starting building: ";
+
+    cin >> ws;
+    getline(cin, startBuilding);
+
+    BuildingGraph.breadthFirstSearch(startBuilding);
 }
+
 
 void searchFacilityById() { // take input and provde that to the hash table's find function
     string id;
