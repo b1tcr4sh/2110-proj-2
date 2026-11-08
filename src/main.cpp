@@ -11,6 +11,44 @@ using namespace std;
 CampusGraph BuildingGraph;
 FacilityTable FacilityHashTable(50); // initialize the hash table for storing facility information with a size parameter
 
+string ParseUserFieldInputString(unsigned int length) { // helper function to standardize and handle errors for numeric input fields
+    string input;
+    cin >> input;
+
+    if (input.size() > length || input.size() < 1) { // if the string is empty or too long
+        cout << "malformed input: " << input << ": input should be more than 0 characters and less than " << length << " characters." << endl; // print an error
+        return "null"; // and exit early
+    }
+
+    for (char c : input) { // for every character
+        if (!isalnum(c) || c == ' ') { // if it's not alphanumeric or a space
+            cout << "malformed input: " << input << ": input should be a number." << endl; // print an error
+            return "null"; // and exit early
+        }
+    }
+
+    return input;
+}
+
+int ParseUserFieldInputInt(unsigned int length) { // helper function to standardize and handle errors for numeric input fields
+    string input;
+    cin >> input;
+
+    if (input.size() > length || input.size() < 1) { // if the string is empty or too long
+        cout << "malformed input: " << input << ": input should be more than 0 characters and less than " << length << " characters." << endl; // print an error
+        return -1; // and exit early
+    }
+
+    for (char c : input) { // for every character
+        if (!isdigit(c)) { // if it's not a digit
+            cout << "malformed input: " << input << ": input should be a number." << endl; // print an error
+            return -1; // and exit early
+        }
+    }
+
+    return stoi(input); // convert to an int and return
+}
+
 void graphBFS() {
 
 }
@@ -18,12 +56,16 @@ void graphBFS() {
 void searchFacilityById() { // take input and provde that to the hash table's find function
     string id;
     cout << endl << "ID > ";
-    cin >> id;
+    id = ParseUserFieldInputString(4);
 
-    Facility fac = FacilityHashTable.Find(id);
+    if (id == "null") { // if the parsing errored out
+        return; // then return
+    }
 
-    if (fac.name != "null") {
-        cout << endl << fac.name << ": " << fac.id << endl;
+    Facility fac = FacilityHashTable.Find(id); // otherwise, find the facility
+
+    if (fac.name != "null") { // if it can be found
+        cout << endl << fac.name << ": " << fac.id << endl; // then print it's info
         cout << " Located at: " << fac.building << endl;
         cout << " Category: " << fac.category << endl;
     }
