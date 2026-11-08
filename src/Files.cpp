@@ -1,10 +1,13 @@
+// author: Rylee Ford
+// purpose: implements some static helper functions for parsing files and string input. The goal is to standardize the error handling and method of loading for our group so we get consistent behavior.
+
 #include "../include/Files.h"
 #include <cctype>
 #include <algorithm>
 
 using namespace std;
 
-string Files::trim(string input) { // trim a string
+string Files::trim(string input) { // trim whitespace from a string
         // Find the first character that isnt whitespace
         size_t start = input.find_first_not_of(" \t\r\n");
 
@@ -19,19 +22,17 @@ string Files::trim(string input) { // trim a string
         return input;
 }
 
-string Files::to_upper(string text) {
-    // Converts string to uppercase so capitalization doesn't matter when comparing names
+string Files::to_upper(string text) {    // Converts string to uppercase so capitalization doesn't matter when comparing names
     transform(text.begin(), text.end(), text.begin(), [](unsigned char c) { return toupper(c); });
     return text;
 }
 
-string Files::to_lower(string text) {
-    // Converts string to lowercase so capitalization doesn't matter when comparing names
+string Files::to_lower(string text) {    // Converts string to lowercase so capitalization doesn't matter when comparing names
     transform(text.begin(), text.end(), text.begin(), [](unsigned char c) { return tolower(c); });
     return text;
 }
 
-vector<string> Files::split(string input, string delimiter) {
+vector<string> Files::split(string input, string delimiter) { // split a string by a delimter and return a list of tokens
     vector<string> tokens; 
     size_t pos = 0;
     string token;
@@ -45,7 +46,7 @@ vector<string> Files::split(string input, string delimiter) {
     return tokens; // and treturn the list of tokens
 }
 
-vector<string> Files::processFileLine(string line, string delim, int &lineNumber) {
+vector<string> Files::processFileLine(string line, string delim, int &lineNumber) { // combination of all of the above functions to make processing the loaded files easier and more standard
     lineNumber++;
 
     // Find the first character that isnt whitespace

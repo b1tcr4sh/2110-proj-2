@@ -1,3 +1,7 @@
+// author: Rylee Ford
+// purpose: Class that defines some static helper functions for parsing files and string input. The goal is to standardize the error handling and method of loading for our group so we get consistent behavior.
+
+
 #ifndef _FILES_H_
 #define _FILES_H_
 

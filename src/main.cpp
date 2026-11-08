@@ -1,3 +1,6 @@
+// author: Rylee Ford
+// purpose: handles loading the files and is an intermediate between user input and the various systems in the program
+
 #include <cctype>
 #include <iostream>
 #include "../include/CampusGraph.h"
@@ -12,7 +15,7 @@ void graphBFS() {
 
 }
 
-void searchFacilityById() {
+void searchFacilityById() { // take input and provde that to the hash table's find function
     string id;
     cout << endl << "ID > ";
     cin >> id;
@@ -26,7 +29,7 @@ void searchFacilityById() {
     }
 }
 
-bool HandleInut(string inputStr) {
+bool HandleInut(string inputStr) { // take in raw input, process it, and handle it
     if (inputStr.size() > 2 || inputStr.size() < 1) { // if the string is empty or too long
         cout << "input not recognized: " << inputStr << endl; // print an error
         return true; // and exit early
@@ -74,7 +77,7 @@ bool HandleInut(string inputStr) {
     }
 }
 
-void PrintMenu() {
+void PrintMenu() { // what it says
     cout << "==== Campus Navigator ====" << endl;
     cout << "1. View all facilities" << endl;
     cout << "2. Search facility by ID" << endl;

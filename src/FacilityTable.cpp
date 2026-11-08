@@ -1,10 +1,13 @@
+// author: Rylee Ford
+// purpose: implements the top level Hash Table as well as Facility management functions
+
 #include <fstream>
 #include <iostream>
 #include <vector>
 #include "../include/FacilityTable.h"
 #include "../include/Files.h"
 
-FacilityTable::FacilityTable(int size) {
+FacilityTable::FacilityTable(int size) { // basic constructor that defines the number of buckets the table will have
     this->size = size;
 
     for (int i = 0; i < size; i++) { // fill table with empty chains
@@ -12,7 +15,7 @@ FacilityTable::FacilityTable(int size) {
     }
 }
 
-void FacilityTable::Load(string filename) {
+void FacilityTable::Load(string filename) { // load the facilities.txt file, process, and store it's input
     ifstream file(filename);
 
     if (file.bad() || file.fail() || !file.is_open()) {
@@ -71,7 +74,7 @@ void FacilityTable::Load(string filename) {
     cout << "Facilities Load Factor: " << LoadFactor() << endl;
 }
 
-Facility FacilityTable::Find(string id) {
+Facility FacilityTable::Find(string id) { // search for a key in a bucket by hashing it, then searching the bucket to find the entry
     id = normalize(id); // normalize the key
 
     if (!isValid(id)) { // if the key is formatted incorrectly,
@@ -90,7 +93,7 @@ Facility FacilityTable::Find(string id) {
     return *fac; // otherwise, return a copy of it
 }
 
-bool FacilityTable::Create(string id, string name, string building, string category) {
+bool FacilityTable::Create(string id, string name, string building, string category) { // create a facility entry and insert it into the chain
     id = normalize(id); // normalize the key
 
     if (!isValid(id)) { // if the format of the id is invalid,
@@ -110,7 +113,7 @@ bool FacilityTable::Create(string id, string name, string building, string categ
     return true;
 }
 
-void FacilityTable::Remove(string id) {
+void FacilityTable::Remove(string id) { // remove an entry from the table
     id = normalize(id); // normalize the key
     FacilityChain* bucket = hash(id); // find the bucket that the key belongs in
 
@@ -118,14 +121,14 @@ void FacilityTable::Remove(string id) {
     bucket->removeFromList(fac); // and remove it
 }
 
-FacilityChain* FacilityTable::hash(string id) {
+FacilityChain* FacilityTable::hash(string id) { // hashing wrapper function that gets the index of the hashed key and returns a reference to the appropriate chain
     int hash = DJB2(id);
 
     
     return table.at(hash); // return the pointer to the corresponding bucket (the hash is the array index)
 }
 
-int FacilityTable::DJB2(string key) {
+int FacilityTable::DJB2(string key) { // implements the DJB2 hashing algorithm
     int running = startingValue; // start with the constant starting value
 
     for (unsigned int i = 0; i < key.size(); i++) { // for each character in the key,
@@ -136,7 +139,7 @@ int FacilityTable::DJB2(string key) {
     return running % size; // mod with the size of the table and return the key
 }
 
-void FacilityTable::ListAll() {
+void FacilityTable::ListAll() { // iterate through each chain in the table and print out their contents
     cout << endl << "===== Facilities List =====" << endl;
 
     for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
@@ -149,7 +152,7 @@ void FacilityTable::ListAll() {
     }
 }
 
-bool FacilityTable::isValid(string id) {
+bool FacilityTable::isValid(string id) { // helper function to determine if a key is "valid" (is formatted correctly)
     if (id.at(0) != 'F' || id.size() != 4) { // if the first character is not an f or is not of length 4
         cout << "Invalid format: an ID is F followed by exactly three digits" << endl; // then print an error
         return false; // and exit early
@@ -157,14 +160,14 @@ bool FacilityTable::isValid(string id) {
     return true; // if nothing is caught, the key is fine as is
 }
 
-string FacilityTable::normalize(string key) {
+string FacilityTable::normalize(string key) { // helper function to normalize a key before doing anything with it
     // normalize to uppercase and trim whitespace
     key = Files::to_upper(key);
     key = Files::trim(key);
     return key;
 }
 
-float FacilityTable::LoadFactor() {
+float FacilityTable::LoadFactor() { // computes and returns the current load factor of the table
     int sum = 0;
     for (unsigned int i = 0; i < table.size(); i++) {
         FacilityChain* chain = table.at(i);

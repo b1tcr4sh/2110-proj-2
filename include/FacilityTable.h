@@ -1,3 +1,6 @@
+// author: Rylee Ford
+// purpose: Class that defines the top level Hash Table as well as Facility management functions
+
 #ifndef _FACILITYTABLE_H_
 #define _FACILITYTABLE_H_
 
@@ -10,7 +13,7 @@ class FacilityTable { // stores all facilities as a hash table
 
         void Load(string filename); // load from file
         bool Create(string id, string name, string building, string category); // insert a new element into the table (this function will actually create the facility)
-        void Remove(string id);
+        void Remove(string id); // find the facility and remove it
         Facility Find(string id); // find a specific facility; combination of a hashing function and linear search that returns a copy so we don't break the hash table
         void ListAll(); // list every entry in the table
         float LoadFactor(); // compute the load factor

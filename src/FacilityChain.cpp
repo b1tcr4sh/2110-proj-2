@@ -1,7 +1,10 @@
+// author: Rylee Ford
+// purpose: implements the chain for the Facilities hash table. Performs pointer operations on and stores individual Facility objects
+
 #include <iostream>
 #include "../include/FacilityChain.h"
 
-void FacilityChain::appendToList(Facility* fac) {
+void FacilityChain::appendToList(Facility* fac) { // append an element to the linked list no questions asked
     if (head != NULL) { // if list already has elements in it,
         tail->next = fac; // then append the element to the end of list
         tail = fac; // and make it the end of the list
@@ -10,9 +13,10 @@ void FacilityChain::appendToList(Facility* fac) {
         tail = head; // and last
     }
     size++; // iterate size
+    collisions++; // if we added to the list, that means there was a collision
 }
 
-void FacilityChain::removeFromList(Facility* fac) {
+void FacilityChain::removeFromList(Facility* fac) { // remove an element from the linked list and delete it
     Facility* temp = head;
 
     if (temp == NULL) {
@@ -54,7 +58,7 @@ void FacilityChain::removeFromList(Facility* fac) {
     cout << fac->id << " not found in list..." << endl;
 }
 
-Facility* FacilityChain::LinearSearch(string id) {
+Facility* FacilityChain::LinearSearch(string id) { // perform a linear search on the linked list and return the element with the matching id
     if (head == NULL) return NULL; // if the list is empty, exit early
 
     Facility* temp = head;
@@ -68,7 +72,7 @@ Facility* FacilityChain::LinearSearch(string id) {
     return NULL; // couldn't find, so we return NULL
 }
 
-void FacilityChain::ListAll() {
+void FacilityChain::ListAll() { // enumerate the list
     if (size == 0) { // if the head is not set then this chain is empty,
         return; // so we can exit early
     }
@@ -92,11 +96,10 @@ void FacilityChain::ListAll() {
     cout << " Category: " << tail->category << endl;
 }
 
-int FacilityChain::Size() {
+int FacilityChain::Size() { // wrapper function to return the current size of the list
     return size;
 }
 
-int FacilityChain::NumCollisions() {
-    if (size > 1) return size - 1;
-    else return 0;
+int FacilityChain::NumCollisions() { // compute the number of collisions the table must have encountered and return it
+    return collisions;
 }
