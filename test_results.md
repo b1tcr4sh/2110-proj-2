@@ -39,6 +39,13 @@
 * Program showed 6 out of 7 buildings were reachable.
 * **Result: Passed**
 
+### Invalid BFS Starting Building
+
+* Ran BFS starting with "Fake Building".
+* Verified that the program displayed "Building not found."
+* Confirmed that the program returned to the main menu without crashing.
+* **Result: Passed**
+
 ### Case-Insensitive Search
 
 * Tested BFS using "library" instead of "Library".
