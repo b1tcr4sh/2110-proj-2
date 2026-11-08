@@ -43,6 +43,12 @@ void FacilityTable::Load(string filename) {
         string building = Files::trim(tokens.at(2)); // the trimmed third token
         string category = Files::trim(tokens.at(3)); // the  trimmed forth token
 
+        if (name == "") {
+            cout << "Warning: Facility name is empty: line " << lineNumber << endl;
+            rejected++;
+            continue;
+        }
+
         if (Create(id, name, building, category)) loaded++; // if it is succesfully created and added to the table, then incremend the number of loaded records
         else rejected++; // otherwise, increment the number of rejected records
     }
@@ -73,7 +79,7 @@ Facility FacilityTable::Find(string id) {
     Facility* fac = bucket->LinearSearch(id); // search the bucket to find the element
 
     if (fac == NULL) { // if it wasn't found in bucket
-        // cout << "Not found: no facility with ID " << id << endl;
+        cout << "Not found: no facility with ID " << id << endl;
         return Facility("null", "null", "null", "null"); // then exit
     }
 

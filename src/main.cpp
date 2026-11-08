@@ -17,9 +17,12 @@ void searchFacilityById() {
     cin >> id;
 
     Facility fac = FacilityHashTable.Find(id);
-    cout << endl << fac.name << ": " << fac.id << endl;
-        cout << " Located at: " << fac.building << endl;
-        cout << " Category: " << fac.category << endl;
+
+    if (fac.name != "null") {
+        cout << endl << fac.name << ": " << fac.id << endl;
+            cout << " Located at: " << fac.building << endl;
+            cout << " Category: " << fac.category << endl;
+    }
 }
 
 bool HandleInut(int input) {
