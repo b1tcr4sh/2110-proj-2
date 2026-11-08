@@ -13,6 +13,7 @@ class FacilityTable { // stores all facilities as a hash table
         void Remove(string id);
         Facility Find(string id); // find a specific facility; combination of a hashing function and linear search that returns a copy so we don't break the hash table
         void ListAll(); // list every entry in the table
+        float LoadFactor(); // compute the load factor
     private:
         const int multiplier = 33;
         const int startingValue = 5381;

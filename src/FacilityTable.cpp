@@ -51,6 +51,14 @@ void FacilityTable::Load(string filename) {
     cout << "File: " << filename << endl;
     cout << "Facilities loaded: " << loaded << endl;
     cout << "Facilities rejected: " << rejected << endl;
+    cout << "Facilities Load Factor: " << LoadFactor() << endl;
+    
+    int collisions = 0;
+    for (unsigned int i = 0; i < table.size(); i++) {
+        FacilityChain* chain = table.at(i);
+        collisions += chain->NumCollisions(); // add the number of collisions 
+    }
+    cout << "Facility Collisions: " << collisions << endl;
 }
 
 Facility FacilityTable::Find(string id) {
@@ -118,8 +126,12 @@ int FacilityTable::DJB2(string key) {
 }
 
 void FacilityTable::ListAll() {
-    for (int i = 0; i < size; i++) { // go through each bucket
+    for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
         FacilityChain* chain = table.at(i);
+        if (chain == NULL) {
+            cout << "chain uninitialized.." << endl;
+            return;
+        }
         chain->ListAll(); // and list it
     }
 }
@@ -137,4 +149,15 @@ string FacilityTable::normalize(string key) {
     key = Files::to_upper(key);
     key = Files::trim(key);
     return key;
+}
+
+float FacilityTable::LoadFactor() {
+    int sum = 0;
+    for (unsigned int i = 0; i < table.size(); i++) {
+        FacilityChain* chain = table.at(i);
+
+        sum += chain->Size();
+    }
+
+    return (float) sum / (float) size; 
 }

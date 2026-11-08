@@ -2,13 +2,14 @@
 #include "../include/FacilityChain.h"
 
 void FacilityChain::appendToList(Facility* fac) {
-        if (head != NULL) { // if list already has elements in it,
-            tail->next = fac; // then append the element to the end of list
-            tail = fac; // and make it the end of the list
-        } else { // if the list is empty,
-            head = fac; // then make the new element the first in the list
-            tail = head; // and last
-        }
+    if (head != NULL) { // if list already has elements in it,
+        tail->next = fac; // then append the element to the end of list
+        tail = fac; // and make it the end of the list
+    } else { // if the list is empty,
+        head = fac; // then make the new element the first in the list
+        tail = head; // and last
+    }
+    size++; // iterate size
 }
 
 void FacilityChain::removeFromList(Facility* fac) {
@@ -25,11 +26,13 @@ void FacilityChain::removeFromList(Facility* fac) {
             head = temp->next; // then, set the head to the predecessor of the element we're looking for
             temp->next = NULL; // and exclude it from the list
             delete temp; // then we can delete it
+            size--; // decrement size
         } else { // otherwise, the head (and tail) is the only element in the list
             temp->next = NULL; // se we exclude it from the list
             head = NULL; // and deinitialize the list by making the head null
             tail = NULL;  // and the tail
             delete temp; // then we can delete it
+            size--; // decrement size
         }
 
     }
@@ -42,6 +45,7 @@ void FacilityChain::removeFromList(Facility* fac) {
             } 
             fac->next = NULL; // and regardless, the found element should not point into the list
             delete fac; // then we can delete it
+            size--; // decrement size
         }
 
         temp = temp->next; // iterate through elements
@@ -84,4 +88,13 @@ void FacilityChain::ListAll() {
     cout << tail->name << ": " << tail->id << endl;
         cout << " Located at: " << tail->building << endl;
         cout << " Category: " << tail->category << endl;
+}
+
+int FacilityChain::Size() {
+    return size;
+}
+
+int FacilityChain::NumCollisions() {
+    if (size > 1) return size - 1;
+    else return 0;
 }

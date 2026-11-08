@@ -11,7 +11,10 @@ class FacilityChain { // wrapper for linked list
         Facility* LinearSearch(string id); // finds based on key (for chained elements)
         void removeFromList(Facility* fac); // helper function to remove from the list
         void ListAll(); // list all elements in the chain
+        int Size(); // get the size
+        int NumCollisions(); // get the number of collisions in this chain
     private:
+        int size = 0;
         Facility* head;
         Facility* tail;
 };
