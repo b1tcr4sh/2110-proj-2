@@ -1,3 +1,4 @@
+#include <cctype>
 #include <iostream>
 #include "../include/CampusGraph.h"
 #include "../include/FacilityTable.h"
@@ -27,7 +28,22 @@ void searchFacilityById() {
     }
 }
 
-bool HandleInut(int input) {
+bool HandleInut(string inputStr) {
+    if (inputStr.size() > 2 || inputStr.size() < 1) { // if the string is empty or too long
+        cout << "input not recognized: " << inputStr << endl; // print an error
+        return true; // and exit early
+    }
+
+    for (char c : inputStr) { // for every character
+        if (!isdigit(c)) { // if it's not a digit
+            cout << "input not recognized: " << inputStr << endl; // print an error
+            return true; // and exit early
+        }
+    }
+
+    int input = stoi(inputStr); // conver to an int so we can process it easier
+
+
     switch (input) {
         case 1: // view all facilities
             FacilityHashTable.ListAll(); 
@@ -84,12 +100,13 @@ int main(int argc, char *argv[]) {
     BuildingGraph.loadConnections(dataDirectory + "/connections.txt");
     FacilityHashTable.Load(dataDirectory + "/facilities.txt");
 
-    int input;
+    string input;
     bool cont = true;
     while (cont) { // loop until program end; makes sure that user gets prompted with a new menu after each operaiton
         cout << endl;
         PrintMenu(); // print the menu
         cin >> input;
+        
         cont = HandleInut(input); // take user input and do things with it
     }
 
