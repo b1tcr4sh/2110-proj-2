@@ -57,14 +57,18 @@ void FacilityTable::Load(string filename) {
     cout << "File: " << filename << endl;
     cout << "Facilities loaded: " << loaded << endl;
     cout << "Facilities rejected: " << rejected << endl;
-    cout << "Facilities Load Factor: " << LoadFactor() << endl;
     
     int collisions = 0;
+    int total = 0;
     for (unsigned int i = 0; i < table.size(); i++) {
         FacilityChain* chain = table.at(i);
         collisions += chain->NumCollisions(); // add the number of collisions 
+        total += chain->Size(); // add the size of the chain
     }
     cout << "Facility Collisions: " << collisions << endl;
+    cout << "Number of Chains: " << size << endl;
+    cout << "Number of Facilities Stored: " << total << endl;
+    cout << "Facilities Load Factor: " << LoadFactor() << endl;
 }
 
 Facility FacilityTable::Find(string id) {
