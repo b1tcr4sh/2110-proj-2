@@ -6,8 +6,12 @@
 
 using namespace std;
 
-class DepartmentNode {
+// used to define the parent root, leaf nodes, child nodes.
 
+class DepartmentNode {
+public:
+
+private:
 
 };
 

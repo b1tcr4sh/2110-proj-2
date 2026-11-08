@@ -42,13 +42,17 @@ bool HandleInut(int input) {
         case 5: // BFS
             graphBFS();
             return true;
-        case 6: // add department
+        case 6: // add department 
+            addDepartment();
             return true;
         case 7: // search department
+            searchDepartment();
             return true;
         case 8: // display department hierarchy
+            displayDepartmentHierarchy();
             return true;
         case 9: // run preorder traversal
+            preorderTraversal();
             return true;
         case 10: // exit
             return false;
