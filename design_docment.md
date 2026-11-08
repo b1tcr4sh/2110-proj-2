@@ -18,6 +18,8 @@ The facilities and hash table are implemented in 3 separate classes, each repres
 
 This is the parent class that is itself the actual has table. The chains are stored in a vector so the size can be dynamic and resizing could be supported if need be. The functionality of loading the Facilities file, creating, storing, deleting, hashing, finding, and managing the table is all implemented here. The choice to abstract the other stages means that the inner workings of the buckets is arbitrary and the table is not manipulating the individual faciltiies itself. This is very useful for expanding the functionality and compartmentalizing errors. 
 
+I'm choosing an initialization size of 50 because I want to anticipate large test sizes and keep speed high. The linked lists are very efficient to store, especially when empty, so I'm not that worried about taking up space.
+
 ## FacilityChain
 
 This is the class that represents the individual buckets. I decided to implement these using Separate Chaining and so FacilityChain is implemented as a linked list. This is a strategic choice because it keeps table operations very quick as long as a large enough bucket value is chose relative to the number of facilities stored, but it will never completely fill up. This is useful, because the number of facilities will always be known at runtime (they are loaded from a static file, rather than input during the program's operation), so the number of chains can be tuned to get optimal performance.

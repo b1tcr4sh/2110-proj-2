@@ -93,9 +93,9 @@ void FacilityChain::ListAll() { // enumerate the list
         cout << " Located at: " << temp->building << endl;
         cout << " Category: " << temp->category << endl;
 
-        // if (temp->next != NULL) {
-        //     temp = temp->next; // step to the next element
-        // } else break;
+        if (temp->next != NULL) {
+            temp = temp->next; // step to the next element
+        } else break;
     }
 
     // print out the tail

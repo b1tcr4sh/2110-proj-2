@@ -9,7 +9,7 @@
 using namespace std;
 
 CampusGraph BuildingGraph;
-FacilityTable FacilityHashTable(5); // initialize the hash table for storing facility information with a size parameter
+FacilityTable FacilityHashTable(50); // initialize the hash table for storing facility information with a size parameter
 
 bool FieldInputValidString(unsigned int length, string input) { // helper function to standardize and handle errors for numeric input fields
     if (input.size() > length || input.size() < 1) { // if the string is empty or too long
