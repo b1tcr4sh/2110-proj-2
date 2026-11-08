@@ -11,37 +11,31 @@ using namespace std;
 CampusGraph BuildingGraph;
 FacilityTable FacilityHashTable(50); // initialize the hash table for storing facility information with a size parameter
 
-string ParseUserFieldInputString(unsigned int length) { // helper function to standardize and handle errors for numeric input fields
-    string input;
-    cin >> input;
-
+bool FieldInputValidString(unsigned int length, string input) { // helper function to standardize and handle errors for numeric input fields
     if (input.size() > length || input.size() < 1) { // if the string is empty or too long
         cout << "malformed input: " << input << ": input should be more than 0 characters and less than " << length << " characters." << endl; // print an error
-        return "null"; // and exit early
+        return false; // and exit early
     }
 
     for (char c : input) { // for every character
         if (!isalnum(c) || c == ' ') { // if it's not alphanumeric or a space
             cout << "malformed input: " << input << ": input should be a number." << endl; // print an error
-            return "null"; // and exit early
+            return false; // and exit early
         }
     }
 
-    return input;
+    return true;
 }
 
-int ParseUserFieldInputInt(unsigned int length) { // helper function to standardize and handle errors for numeric input fields
-    string input;
-    cin >> input;
-
+int ParseFieldInputInt(unsigned int length, string input) { // helper function to standardize and handle errors for numeric input fields
     if (input.size() > length || input.size() < 1) { // if the string is empty or too long
-        cout << "malformed input: " << input << ": input should be more than 0 characters and less than " << length << " characters." << endl; // print an error
+        cout << "Malformed Input: " << input << ": input should be more than 0 characters and less than " << length << " characters." << endl; // print an error
         return -1; // and exit early
     }
 
     for (char c : input) { // for every character
         if (!isdigit(c)) { // if it's not a digit
-            cout << "malformed input: " << input << ": input should be a number." << endl; // print an error
+            cout << "Malformed Input: " << input << ": input should be a number." << endl; // print an error
             return -1; // and exit early
         }
     }
@@ -56,9 +50,8 @@ void graphBFS() {
 void searchFacilityById() { // take input and provde that to the hash table's find function
     string id;
     cout << endl << "ID > ";
-    id = ParseUserFieldInputString(4);
-
-    if (id == "null") { // if the parsing errored out
+    cin >> id;
+    if (!FieldInputValidString(4, id)) { // if the parsing errored out
         return; // then return
     }
 
@@ -72,19 +65,7 @@ void searchFacilityById() { // take input and provde that to the hash table's fi
 }
 
 bool HandleInut(string inputStr) { // take in raw input, process it, and handle it
-    if (inputStr.size() > 2 || inputStr.size() < 1) { // if the string is empty or too long
-        cout << "input not recognized: " << inputStr << endl; // print an error
-        return true; // and exit early
-    }
-
-    for (char c : inputStr) { // for every character
-        if (!isdigit(c)) { // if it's not a digit
-            cout << "input not recognized: " << inputStr << endl; // print an error
-            return true; // and exit early
-        }
-    }
-
-    int input = stoi(inputStr); // conver to an int so we can process it easier
+    int input = ParseFieldInputInt(2, inputStr); // parse the input
 
 
     switch (input) {
