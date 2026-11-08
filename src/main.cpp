@@ -69,11 +69,15 @@ void PrintMenu() {
     cout << "10. Exit" << endl << endl;
 }
 
-int main() {
-    // need to handle Accept an optional command-line argument naming the data directory (for example, ./campus testdata/case1). If it is omitted, use data/.
-    BuildingGraph.loadBuildings("data/buildings.txt");
-    BuildingGraph.loadConnections("data/connections.txt");
-    FacilityHashTable.Load("data/facilities.txt");
+int main(int argc, char *argv[]) {
+    string dataDirectory = "data";
+    if (argc > 1) { // if arguments are provided
+        dataDirectory = argv[1]; // use the first one as the directory to look for data files
+    }
+
+    BuildingGraph.loadBuildings(dataDirectory + "/buildings.txt");
+    BuildingGraph.loadConnections(dataDirectory + "/connections.txt");
+    FacilityHashTable.Load(dataDirectory + "/facilities.txt");
 
     int input;
     bool cont = true;
