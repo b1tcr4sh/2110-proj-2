@@ -15,8 +15,8 @@ class FacilityChain { // wrapper for linked list
         int NumCollisions(); // get the number of collisions in this chain
     private:
         int size = 0;
-        Facility* head;
-        Facility* tail;
+        Facility* head = NULL;
+        Facility* tail = NULL;
 };
 
 #endif

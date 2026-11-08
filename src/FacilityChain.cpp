@@ -69,25 +69,27 @@ Facility* FacilityChain::LinearSearch(string id) {
 }
 
 void FacilityChain::ListAll() {
-    if (head == NULL) { // if the head is not set then this chain is empty,
+    if (size == 0) { // if the head is not set then this chain is empty,
         return; // so we can exit early
     }
 
     Facility* temp = head; // start at the head
 
-    do { // until we're at the end of the chain
+    while (temp != tail) { // until we're at the end of the chain
         // print out the element
         cout << temp->name << ": " << temp->id << endl;
         cout << " Located at: " << temp->building << endl;
         cout << " Category: " << temp->category << endl;
 
-        temp = temp->next; // step to the next element
-    } while (temp != tail);
+        // if (temp->next != NULL) {
+        //     temp = temp->next; // step to the next element
+        // } else break;
+    }
 
     // print out the tail
     cout << tail->name << ": " << tail->id << endl;
-        cout << " Located at: " << tail->building << endl;
-        cout << " Category: " << tail->category << endl;
+    cout << " Located at: " << tail->building << endl;
+    cout << " Category: " << tail->category << endl;
 }
 
 int FacilityChain::Size() {

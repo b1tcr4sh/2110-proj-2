@@ -5,7 +5,7 @@
 using namespace std;
 
 CampusGraph BuildingGraph;
-FacilityTable FacilityHashTable(15); // initialize the hash table for storing facility information with a size parameter
+FacilityTable FacilityHashTable(50); // initialize the hash table for storing facility information with a size parameter
 
 void graphBFS() {
 
