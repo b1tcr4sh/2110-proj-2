@@ -13,7 +13,9 @@ void FacilityChain::appendToList(Facility* fac) { // append an element to the li
         tail = head; // and last
     }
     size++; // iterate size
-    collisions++; // if we added to the list, that means there was a collision
+    if (size > 1) { // if there are already elements in the list
+        collisions++; // and we added to the list, that means there was a collision
+    }
 }
 
 void FacilityChain::removeFromList(Facility* fac) { // remove an element from the linked list and delete it
@@ -63,12 +65,18 @@ Facility* FacilityChain::LinearSearch(string id) { // perform a linear search on
 
     Facility* temp = head;
 
-    do {
+    while (temp != tail) {
         if (temp->id == id) { // if the id matches
             return temp; // then return it
         }
 
-    } while (temp != tail);
+        temp = temp->next;
+    }
+
+    if (tail->id == id) {
+        return tail;
+    }
+
     return NULL; // couldn't find, so we return NULL
 }
 

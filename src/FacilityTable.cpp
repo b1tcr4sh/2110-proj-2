@@ -38,6 +38,7 @@ void FacilityTable::Load(string filename) { // load the facilities.txt file, pro
 
         if (tokens.size() != 4) { // if there are not 4 tokens, the formatting is incorrect
             cout << "Malformed Line: " << filename << " line " << lineNumber << ": incorrect number or format of tokens." << endl;
+            rejected++; // iterate rejected
             continue; // skip it
         }
 
@@ -123,13 +124,14 @@ void FacilityTable::Remove(string id) { // remove an entry from the table
 
 FacilityChain* FacilityTable::hash(string id) { // hashing wrapper function that gets the index of the hashed key and returns a reference to the appropriate chain
     int hash = DJB2(id);
-
+    // cout << hash << endl;
     
     return table.at(hash); // return the pointer to the corresponding bucket (the hash is the array index)
 }
 
 int FacilityTable::DJB2(string key) { // implements the DJB2 hashing algorithm
     int running = startingValue; // start with the constant starting value
+    // cout << "hashing..." << endl;
 
     for (unsigned int i = 0; i < key.size(); i++) { // for each character in the key,
         running *= multiplier; // multiply by the constant multiplier
