@@ -14,7 +14,7 @@
 
 ### Rylee Ford - Member A - Facilitie Hash Table
 
-**Files** `FacilityTable.h`, `FacilityTable.cpp`, `FacilityChain.h`, `FacilityTable.cpp`, `Facility.h`, `Facility.cpp`, `Files.h`, `Files.cpp`, `main.cpp`
+**Files** `FacilityTable.h`, `FacilityTable.cpp`, `FacilityChain.h`, `FacilityChain.cpp`, `Facility.h`, `Facility.cpp`, `Files.h`, `Files.cpp`, `main.cpp`
 
 * Designed and implemented the Facilities Hash Table using separate chaining
 * Implemented loading facilities.txt
