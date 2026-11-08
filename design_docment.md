@@ -26,7 +26,7 @@ This is the class that represents the individual buckets. I decided to implement
 
 ### Collisions
 
-I'm defining a **collision** to mean anytime a linked list is appended to. This is logically the same as anytime multiple facilities are hashed to the same value. Because I'm using separate chaining, the collision resolution strategy is just to append to the chain when inserting into the list and linear search through the chain to retrieve from a bucket with collisions. This does mean that, as chains grow, both insertion and retrieval operations become polynomial time. When inserting, we have to check for duplicates in the bucket, and when retrieving, we have to search the bucket. 
+I'm defining a **collision** to mean anytime a linked list is appended to when it already has 1 or more elements. This is logically the same as anytime multiple facilities are hashed to the same value. Because I'm using separate chaining, the collision resolution strategy is just to append to the chain when inserting into the list and linear search through the chain to retrieve from a bucket with collisions. This does mean that, as chains grow, both insertion and retrieval operations become polynomial time. When inserting, we have to check for duplicates in the bucket, and when retrieving, we have to search the bucket. 
 
 ## Facility 
 

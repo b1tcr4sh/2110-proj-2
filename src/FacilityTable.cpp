@@ -144,6 +144,8 @@ int FacilityTable::DJB2(string key) { // implements the DJB2 hashing algorithm
 void FacilityTable::ListAll() { // iterate through each chain in the table and print out their contents
     cout << endl << "===== Facilities List =====" << endl;
 
+    int total = 0;
+
     for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
         FacilityChain* chain = table.at(i);
         if (chain == NULL) {
@@ -151,7 +153,10 @@ void FacilityTable::ListAll() { // iterate through each chain in the table and p
             return;
         }
         chain->ListAll(); // and list it
+        total += chain->Size();
     }
+
+    cout << endl << total << " Total Facilities." << endl;
 }
 
 bool FacilityTable::isValid(string id) { // helper function to determine if a key is "valid" (is formatted correctly)
