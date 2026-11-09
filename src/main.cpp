@@ -12,7 +12,7 @@ using namespace std;
 
 CampusGraph BuildingGraph;
 FacilityTable FacilityHashTable(50); // initialize the hash table for storing facility information with a size parameter
-DepartmentTree DepartmentTrees;
+DepartmentTree CollegeDepartmentTree;
 
 
 bool FieldInputValidString(unsigned int length, string input) { // helper function to standardize and handle errors for numeric input fields
@@ -97,16 +97,16 @@ bool HandleInut(string inputStr) { // take in raw input, process it, and handle 
             graphBFS();
             return true;
         case 6: // add department 
-            // DepartmentTrees.addDepartment();
+            CollegeDepartmentTree.addDepartment();
             return true;
         case 7: // search department
-            // DepartmentTrees.searchDepartment();
+            CollegeDepartmentTree.searchDepartment();
             return true;
         case 8: // display department hierarchy
-            // DepartmentTrees.displayDepartmentHierarchy();
+            CollegeDepartmentTree.displayDepartmentHierarchy();
             return true;
         case 9: // run preorder traversal
-            // DepartmentTrees.preorderTraversal();
+            CollegeDepartmentTree.preorderTraversal();
             return true;
         case 10: // exit
             return false;
@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
     BuildingGraph.loadBuildings(dataDirectory + "/buildings.txt");
     BuildingGraph.loadConnections(dataDirectory + "/connections.txt");
     FacilityHashTable.Load(dataDirectory + "/facilities.txt");
-    DepartmentTrees.Load(dataDirectory + "/departments.txt");
+    CollegeDepartmentTree.Load(dataDirectory + "/departments.txt");
 
     string input;
     bool cont = true;
