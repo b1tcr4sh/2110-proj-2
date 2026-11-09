@@ -91,7 +91,7 @@ DepartmentNode* DepartmentTree::addDepartment(DepartmentNode* parent, string nam
 
     // adding the new department to the root's children list
     parent->children.push_back(newDepartment);
-    cout << "Department added successfully." << endl;
+    // cout << "Department added successfully." << endl;
     
     return newDepartment;
 }

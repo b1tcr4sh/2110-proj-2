@@ -15,16 +15,10 @@ public:
 
     DepartmentNode* parent = nullptr;
     vector<DepartmentNode*> children;
-    DepartmentNode(const string& n) : name(n) {}
-    DepartmentNode() : name("") {}
+    DepartmentNode(const string& n);
+    DepartmentNode();
 
-    void addChild(DepartmentNode* child) {
-        if (child == nullptr) {
-            return;
-        }
-        child->parent = this;
-        children.push_back(child);
-    }    
+    void addChild(DepartmentNode* child);
 };
 
 
