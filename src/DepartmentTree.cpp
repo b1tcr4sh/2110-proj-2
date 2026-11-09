@@ -11,7 +11,7 @@ DepartmentNode* DepartmentTree::addDepartment(DepartmentNode* parent, string nam
 
     if (root == nullptr) {
         cout << "Parent department not found." << endl;
-        return;
+        return nullptr;
     }
 
     // creating a whole new department
@@ -30,29 +30,51 @@ DepartmentNode* DepartmentTree::addDepartment(DepartmentNode* parent, string nam
 DepartmentNode* DepartmentTree::searchDepartment(string name) { // perform a DFS to find a matching department
     if (root == nullptr) {
         cout << "Department tree is empty." << endl;
-        return;
+        return nullptr;
     }
 
-    vector<DepartmentNode*> explored;
-    
+    stack<DepartmentNode*> explored;
+
     DepartmentNode* source = root; // start at the root
 
     if (source->name == name) {
         return source;
     }
 
-    SearchAncestors(source, name); // recursively search each children
-    
+    DepartmentNode* result = SearchAncestors(source, name, explored); // recursively search each children
+    if (result == nullptr) {
+        cout << "not found" << endl;
+    }
+
+    return result;
 }
 
-DepartmentNode* DepartmentTree::SearchAncestors(DepartmentNode* source, string name) {
-    if (source->name == name) {
-        return source;
+DepartmentNode* DepartmentTree::SearchAncestors(DepartmentNode* source, string name, stack<DepartmentNode*> &explored) {
+    if (source->name == name) { // if the source is the correct one, 
+        return source; // return it
+    }
+
+    if (source->children.size() == 0) { // otherwise, if we have hit a leaf and this still isn't the one we're looking for
+        // explored.push(source); // then mark it as explored
+        source->explored = true;
+        return nullptr;
+    }
+
+    bool allChildrenExplored = true;
+    for (unsigned int i = 0; i < source->children.size(); i++) {
+        if (source->children.at(i)->explored == false) {
+            allChildrenExplored = false;
+            break;
+        }
+    }
+
+    if (allChildrenExplored) {
+        return nullptr;
     }
 
     for (unsigned int i = 0; i < source->children.size(); i++) {
-        if (source->children.at(i)->name == name) {
-            SearchAncestors(source->children.at(i), name);
+        if (source->children.at(i)->explored == false) { // for each unexplored child
+            SearchAncestors(source, name, explored); // search it's unexplored ancestors
         }
     }
 }
