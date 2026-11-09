@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <stack>
 #include "DepartmentNode.h"
 
 // functions for the department tree, department statistics, pre order traversal, and department hierarchy.
@@ -20,7 +21,7 @@ class DepartmentTree{
   private:
     DepartmentNode* root;
 
-    DepartmentNode* SearchAncestors(DepartmentNode* source, string name);
+    DepartmentNode* SearchAncestors(DepartmentNode* source, string name, stack<DepartmentNode*> &explored);
 };
 
 #endif

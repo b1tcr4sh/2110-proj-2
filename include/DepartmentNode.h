@@ -12,6 +12,7 @@ class DepartmentNode {
 public:
     string name;
     string id;
+    bool explored = false;
 
     DepartmentNode* parent = nullptr;
     vector<DepartmentNode*> children;
