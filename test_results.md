@@ -200,9 +200,11 @@ tbd
 
 # Test Results - Madison Lusk - Member C
 
-##Unknown building or Parent refernce
+## Unknown building or Parent refernce
 
-##Empty File
+* tbh
+
+## Empty File
 
 * used an departments.txt file:
 
@@ -224,3 +226,11 @@ tbd
         10. Exit
 
    * **Results: passed**
+
+## Malformed Line
+
+* tbh
+
+## Duplicate Record
+
+*tbh
