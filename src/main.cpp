@@ -6,7 +6,6 @@
 #include "../include/CampusGraph.h"
 #include "../include/FacilityTable.h"
 #include "../include/DepartmentTree.h"
-#include "../include/DepartmentTree.h"
 
 using namespace std;
 
