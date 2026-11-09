@@ -11,14 +11,20 @@ using namespace std;
 class DepartmentNode {
 public:
     string name;
-    vector<DepartmentNode> children;
+
+    DepartmentNode* parent = nullptr;
+    vector<DepartmentNode*> children;
     DepartmentNode(const string& n) : name(n) {}
     DepartmentNode() : name("") {}
 
-    void addChild(const DepartmentNode& child) {
+    void addChild(DepartmentNode* child) {
+        if (child == nullptr) {
+            return;
+        }
+        child->parent = this;
         children.push_back(child);
     }
 };
 
 
-#endif // DEPARTMENTNODE_H
+#endif
