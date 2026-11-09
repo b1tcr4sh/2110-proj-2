@@ -11,6 +11,7 @@ using namespace std;
 class DepartmentNode {
 public:
     string name;
+    string id;
 
     DepartmentNode* parent = nullptr;
     vector<DepartmentNode*> children;
@@ -23,7 +24,7 @@ public:
         }
         child->parent = this;
         children.push_back(child);
-    }
+    }    
 };
 
 

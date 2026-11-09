@@ -1,4 +1,4 @@
-#include "DepartmentTree.h"
+#include "../include/DepartmentTree.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -7,13 +7,7 @@ using namespace std;
 
 // adding the department to the main tree
 
-void DepartmentTree::addDepartment() {
-    string departmentName;
-
-    cout << "Enter the department name: ";
-    cin >> departmentName;
-
-    Department* parent = root;
+DepartmentNode* DepartmentTree::addDepartment(DepartmentNode* parent, string name, string id) {
 
     if (root == nullptr) {
         cout << "Parent department not found." << endl;
@@ -21,7 +15,7 @@ void DepartmentTree::addDepartment() {
     }
 
     // creating a whole new department
-    Department* newDepartment = new Department(departmentName);
+    DepartmentNode* newDepartment = new DepartmentNode(name);
 
     // setting the parent of the new department to the root
     newDepartment->parent = parent;
@@ -33,26 +27,34 @@ void DepartmentTree::addDepartment() {
 
 // searching the tree for each of the departments 
 
-void DepartmentTree::searchDepartment() {
-    string departmentName;
-    cout << "Enter the department name to search: ";
-    cin >> departmentName;
-
+DepartmentNode* DepartmentTree::searchDepartment(string name) { // perform a DFS to find a matching department
     if (root == nullptr) {
         cout << "Department tree is empty." << endl;
         return;
     }
-    if (root->children.empty()) {
-        cout << "No departments found." << endl;
-        return;
+
+    vector<DepartmentNode*> explored;
+    
+    DepartmentNode* source = root; // start at the root
+
+    if (source->name == name) {
+        return source;
     }
-    for (const auto& department : root->children) {
-        if (department->name == departmentName) {
-            cout << "Department found: " << department->name << endl;
-            return;
+
+    SearchAncestors(source, name); // recursively search each children
+    
+}
+
+DepartmentNode* DepartmentTree::SearchAncestors(DepartmentNode* source, string name) {
+    if (source->name == name) {
+        return source;
+    }
+
+    for (unsigned int i = 0; i < source->children.size(); i++) {
+        if (source->children.at(i)->name == name) {
+            SearchAncestors(source->children.at(i), name);
         }
     }
-    cout << "Department not found." << endl;    
 }
 
 // displaying the hierarchy for the departments

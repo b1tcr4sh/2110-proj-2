@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "DepartmentNode.h"
 
 // functions for the department tree, department statistics, pre order traversal, and department hierarchy.
 
@@ -11,27 +12,15 @@ using namespace std;
 class DepartmentTree{
   public:
 
-  void addDepartment();
-  void searchDepartment();
+  DepartmentNode* addDepartment(DepartmentNode* parent, string name, string id);
+  DepartmentNode* searchDepartment(string name); // take in name to search for, return the found record
   void displayDepartmentHierarchy();
   void preorderTraversal();
 
   private:
-    Department* root;
-};
+    DepartmentNode* root;
 
-class Department {
-  public:
-    string name;
-    vector<Department*> children;
-    Department* parent;
-    Department(const string& n) : name(n), parent(nullptr) {}
-
-    private:
-    void addChild(Department* child) {
-        children.push_back(child);
-        child->parent = this;
-    }
+    DepartmentNode* SearchAncestors(DepartmentNode* source, string name);
 };
 
 #endif

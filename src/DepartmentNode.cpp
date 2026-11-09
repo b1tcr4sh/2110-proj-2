@@ -1,4 +1,4 @@
-#include "DepartmentNode.h"
+#include "../include/DepartmentNode.h"
 #include <iostream>
 #include <string>
 #include <algorithm>
