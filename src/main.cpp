@@ -5,11 +5,15 @@
 #include <iostream>
 #include "../include/CampusGraph.h"
 #include "../include/FacilityTable.h"
+#include "../include/DepartmentTree.h"
+#include "../include/DepartmentTree.h"
 
 using namespace std;
 
 CampusGraph BuildingGraph;
 FacilityTable FacilityHashTable(50); // initialize the hash table for storing facility information with a size parameter
+DepartmentTree DepartmentTrees;
+
 
 bool FieldInputValidString(unsigned int length, string input) { // helper function to standardize and handle errors for numeric input fields
     if (input.size() > length || input.size() < 1) { // if the string is empty or too long
@@ -92,13 +96,17 @@ bool HandleInut(string inputStr) { // take in raw input, process it, and handle 
         case 5: // BFS
             graphBFS();
             return true;
-        case 6: // add department
+        case 6: // add department 
+            // DepartmentTrees.addDepartment();
             return true;
         case 7: // search department
+            // DepartmentTrees.searchDepartment();
             return true;
         case 8: // display department hierarchy
+            // DepartmentTrees.displayDepartmentHierarchy();
             return true;
         case 9: // run preorder traversal
+            // DepartmentTrees.preorderTraversal();
             return true;
         case 10: // exit
             return false;
@@ -131,6 +139,7 @@ int main(int argc, char *argv[]) {
     BuildingGraph.loadBuildings(dataDirectory + "/buildings.txt");
     BuildingGraph.loadConnections(dataDirectory + "/connections.txt");
     FacilityHashTable.Load(dataDirectory + "/facilities.txt");
+    DepartmentTrees.Load(dataDirectory + "/departments.txt");
 
     string input;
     bool cont = true;

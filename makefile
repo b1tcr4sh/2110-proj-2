@@ -1,5 +1,5 @@
 proj2.out : main.o
-	g++ -Wall -g main.o Files.o CampusGraph.o Facility.o FacilityChain.o FacilityTable.o -o proj2.out
+	g++ -Wall -g main.o Files.o DepartmentNode.o DepartmentTree.o CampusGraph.o Facility.o FacilityChain.o FacilityTable.o -o proj2.out
 
 Files.o: include/Files.h src/Files.cpp
 	g++ -Wall -c -g include/Files.h src/Files.cpp
@@ -16,7 +16,13 @@ FacilityChain.o: Facility.o include/FacilityChain.h src/FacilityChain.cpp
 FacilityTable.o: Files.o FacilityChain.o include/FacilityTable.h src/FacilityTable.cpp
 	g++ -Wall -c -g include/FacilityTable.h src/FacilityTable.cpp
 
-main.o: FacilityTable.o CampusGraph.o src/main.cpp
+DepartmentNode.o: include/DepartmentNode.h src/DepartmentNode.cpp
+	g++ -Wall -c -g include/DepartmentNode.h src/DepartmentNode.cpp
+
+DepartmentTree.o: Files.o DepartmentNode.o include/DepartmentTree.h src/DepartmentTree.cpp
+	g++ -Wall -c -g include/DepartmentTree.h src/DepartmentTree.cpp
+
+main.o: DepartmentTree.o FacilityTable.o CampusGraph.o src/main.cpp
 	g++ -Wall -c -g src/main.cpp
 
 clean:
