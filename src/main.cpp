@@ -2,12 +2,14 @@
 #include "../include/CampusGraph.h"
 #include "../include/FacilityTable.h"
 #include "../include/DepartmentTree.h"
+#include "../include/DepartmentTree.h"
 
 using namespace std;
 
 CampusGraph BuildingGraph;
 FacilityTable FacilityHashTable(50); // initialize the hash table for storing facility information with a size parameter
 DepartmentTree DepartmentTrees;
+
 
 void graphBFS() {
 
@@ -45,16 +47,16 @@ bool HandleInut(int input) {
             graphBFS();
             return true;
         case 6: // add department 
-            DepartmentTrees.addDepartment();
+            // DepartmentTrees.addDepartment();
             return true;
         case 7: // search department
-            DepartmentTrees.searchDepartment();
+            // DepartmentTrees.searchDepartment();
             return true;
         case 8: // display department hierarchy
-            DepartmentTrees.displayDepartmentHierarchy();
+            // DepartmentTrees.displayDepartmentHierarchy();
             return true;
         case 9: // run preorder traversal
-            DepartmentTrees.preorderTraversal();
+            // DepartmentTrees.preorderTraversal();
             return true;
         case 10: // exit
             return false;
@@ -87,6 +89,7 @@ int main(int argc, char *argv[]) {
     BuildingGraph.loadBuildings(dataDirectory + "/buildings.txt");
     BuildingGraph.loadConnections(dataDirectory + "/connections.txt");
     FacilityHashTable.Load(dataDirectory + "/facilities.txt");
+    DepartmentTrees.Load(dataDirectory + "/departments.txt");
 
     int input;
     bool cont = true;

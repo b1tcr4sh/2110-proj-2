@@ -12,8 +12,8 @@ using namespace std;
 
 class DepartmentTree{
   public:
-
-  DepartmentNode* addDepartment(DepartmentNode* parent, string name, string id);
+  void Load(string filename); 
+  DepartmentNode* addDepartment(DepartmentNode* parent, string name);
   DepartmentNode* searchDepartment(string name); // take in name to search for, return the found record
   void displayDepartmentHierarchy();
   void preorderTraversal();
