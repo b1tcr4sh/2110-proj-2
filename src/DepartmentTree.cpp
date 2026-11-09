@@ -46,5 +46,6 @@ void DepartmentTree::displayDepartmentHierarchy() {
 
 // preorder traversal
 void DepartmentTree::preorderTraversal() {
+    
     // Implement preorder traversal logic here
 }

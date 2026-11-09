@@ -4,25 +4,34 @@
 #include <string>
 #include <vector>
 
+// functions for the department tree, department statistics, pre order traversal, and department hierarchy.
+
 using namespace std;
 
-// for the department tree, department statistics, pre order traversal, and department hierarchy.
+class DepartmentTree{
+  public:
 
-class DepartmentTree {
-public:
-    void addDepartment();
-    void searchDepartment();
-    void displayDepartmentHierarchy();
-    void preorderTraversal();
+  void addDepartment();
+  void searchDepartment();
+  void displayDepartmentHierarchy();
+  void preorderTraversal();
 
+  private:
+    Department* root;
+};
 
-private:
-    struct Department {
-        string name;
-        vector<Department> children;
-    };
+class Department {
+  public:
+    string name;
+    vector<Department*> children;
+    Department* parent;
+    Department(const string& n) : name(n), parent(nullptr) {}
 
-    Department root;
-};  
+    private:
+    void addChild(Department* child) {
+        children.push_back(child);
+        child->parent = this;
+    }
+};
 
-#endif // DEPARTMENTTREE_H
+#endif

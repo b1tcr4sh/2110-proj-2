@@ -1,11 +1,13 @@
 #include <iostream>
 #include "../include/CampusGraph.h"
 #include "../include/FacilityTable.h"
+#include "../include/DepartmentTree.h"
 
 using namespace std;
 
 CampusGraph BuildingGraph;
 FacilityTable FacilityHashTable(50); // initialize the hash table for storing facility information with a size parameter
+DepartmentTree DepartmentTrees;
 
 void graphBFS() {
 
@@ -43,16 +45,16 @@ bool HandleInut(int input) {
             graphBFS();
             return true;
         case 6: // add department 
-            addDepartment();
+            DepartmentTrees.addDepartment();
             return true;
         case 7: // search department
-            searchDepartment();
+            DepartmentTrees.searchDepartment();
             return true;
         case 8: // display department hierarchy
-            displayDepartmentHierarchy();
+            DepartmentTrees.displayDepartmentHierarchy();
             return true;
         case 9: // run preorder traversal
-            preorderTraversal();
+            DepartmentTrees.preorderTraversal();
             return true;
         case 10: // exit
             return false;
