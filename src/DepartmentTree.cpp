@@ -28,7 +28,7 @@ void DepartmentTree::Load(string filename) {
             continue; // skip it
         }
 
-        if (tokens.size() != 2) { // if there are not 4 tokens, the formatting is incorrect
+        if (tokens.size() != 2) { // if there are not 2 tokens, the formatting is incorrect
             cout << "Malformed Line: " << filename << " line " << lineNumber << ": incorrect number or format of tokens." << endl;
             continue; // skip it
         }
