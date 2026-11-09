@@ -75,6 +75,42 @@ void searchFacilityById() { // take input and provde that to the hash table's fi
     }
 }
 
+void CreateDepartment() {
+    string name;
+    string parent;
+
+    cout << endl << "Department name > ";
+    cin >> ws;
+    getline(cin, name);
+
+    cout << "Parent department > ";
+    cin >> ws;
+    getline(cin, parent);
+
+    DepartmentNode* parentNode = DepartmentTrees.searchDepartment(parent);
+    if (parentNode != nullptr) {
+        DepartmentTrees.addDepartment(parentNode, name);
+        cout << "Department created successfully!" << endl;
+    } else {
+        cout << "Parent department not found." << endl;
+    }
+}
+
+void SearchForDepartment() {
+    string name;
+
+    cout << endl << "Department name > ";
+    cin >> ws;
+    getline(cin, name);
+
+    DepartmentNode* Founddepartment = DepartmentTrees.searchDepartment(name);
+    if (Founddepartment != nullptr) {
+        cout << "Department found: " << Founddepartment->name << endl;
+    } else {
+        cout << "Department not found." << endl;
+    }
+}
+
 bool HandleInut(string inputStr) { // take in raw input, process it, and handle it
     int input = ParseFieldInputInt(2, inputStr); // parse the input
 
@@ -96,10 +132,10 @@ bool HandleInut(string inputStr) { // take in raw input, process it, and handle 
             graphBFS();
             return true;
         case 6: // add department 
-            DepartmentTrees.addDepartment();
+            CreateDepartment();
             return true;
         case 7: // search department
-            DepartmentTrees.searchDepartment();
+            SearchForDepartment();
             return true;
         case 8: // display department hierarchy
             DepartmentTrees.displayDepartmentHierarchy();

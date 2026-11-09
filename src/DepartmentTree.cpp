@@ -74,6 +74,7 @@ void DepartmentTree::Load(string filename) {
     cout << "Departments rejected: " << rejected << endl;
 }
 
+
 // adding the department to the main tree
 
 DepartmentNode* DepartmentTree::addDepartment(DepartmentNode* parent, string name) {
