@@ -1,51 +1,79 @@
-#include <iostream>
 #include "DepartmentTree.h"
-
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-// add department
+// adding the department to the main tree
 
 void DepartmentTree::addDepartment() {
     string departmentName;
-    cout << "Enter department name: ";
+
+    cout << "Enter the department name: ";
     cin >> departmentName;
-    Department newDepartment;
-    newDepartment.name = departmentName;
-    root.children.push_back(newDepartment);
+
+    Department* parent = root;
+
+    if (root == nullptr) {
+        cout << "Parent department not found." << endl;
+        return;
+    }
+
+    // creating a whole new department
+    Department* newDepartment = new Department(departmentName);
+
+    // setting the parent of the new department to the root
+    newDepartment->parent = parent;
+
+    // adding the new department to the root's children list
+    parent->children.push_back(newDepartment);
+    cout << "Department added successfully." << endl;
 }
 
-// search department
+// searching the tree for each of the departments 
+
 void DepartmentTree::searchDepartment() {
     string departmentName;
-    cout << "Enter department name to search: ";
+    cout << "Enter the department name to search: ";
     cin >> departmentName;
-    
-    // Implement search logic here
-    bool found = false;
-    for (const auto& department : root.children) {
-        if (department.name == departmentName) {
-            found = true;
-            break;
+
+    if (root == nullptr) {
+        cout << "Department tree is empty." << endl;
+        return;
+    }
+    if (root->children.empty()) {
+        cout << "No departments found." << endl;
+        return;
+    }
+    for (const auto& department : root->children) {
+        if (department->name == departmentName) {
+            cout << "Department found: " << department->name << endl;
+            return;
         }
     }
-    if (found) {
-        cout << "Department found." << endl;
-    } else {
-        cout << "Department not found." << endl;
-    }
+    cout << "Department not found." << endl;    
 }
 
-// display department hierarchy
-void DepartmentTree::displayDepartmentHierarchy() {
-    // Implement display logic here
-    for (const auto& department : root.children) {
-        cout << department.name << endl;
-    }
-}
-
-// preorder traversal
-void DepartmentTree::preorderTraversal() {
+// displaying the hierarchy for the departments
     
-    // Implement preorder traversal logic here
+void DepartmentTree::displayDepartmentHierarchy() {
+    cout << "Department Hierarchy:" << endl;
+    for (const auto& department : root->children) {
+        cout << "- " << department->name << endl;
+    }
+    cout << "End of Department Hierarchy." << endl;
+    cout << endl;
+}
+
+// performing preorder traversal of the department tree with a DFS
+
+void DepartmentTree::preorderTraversal() {
+    cout << "Preorder Traversal:" << endl;
+    for (const auto& department : root->children) {
+        cout << "- " << department->name << endl;
+    }
+    cout << "End of Preorder Traversal." << endl;
+    cout << endl;
+
 }
