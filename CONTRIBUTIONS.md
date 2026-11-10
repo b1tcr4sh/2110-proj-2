@@ -33,4 +33,4 @@
 * Implemented the call cases in the main.cpp for adding, searching, and showing the hierarchy of the department tree.
 * Created the Preorder Traversal code for the Deparment Tree
 *Tested out the Department Tree and Node segements in the main.cpp and fixed any issues it had.
-* Made sure that the duplicates, blank files, blank user inputs, and Unknown Parent were rejected and did not go through 
+* Did error testing and fixed Certain issues
