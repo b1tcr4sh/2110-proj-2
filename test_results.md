@@ -204,10 +204,11 @@ tbd
 
 * used an departments.txt file:
 
-    Error: Could not open departments.txt/buildings.txt
-    Error: Could not open departments/connections.txt
-    Warning: File "departments.txt/facilities.txt" failed to open.
-    Warning: File "departments.txt/departments.txt" failed to open.
+* Error: Could not open departments.txt/buildings.txt
+* Error: Could not open departments/connections.txt
+
+       Warning: File "departments.txt/facilities.txt" failed to open.
+        Warning: File "departments.txt/departments.txt" failed to open.
 
         ==== Campus Navigator ====
         1. View all facilities
@@ -235,10 +236,10 @@ tbd
 
 * tested with "history" in parent department
 
-    Department name > Physics
-    Parent department > history
-    Department tree is empty.
-    Parent department not found.
+        Department name > Physics
+        Parent department > history
+        Department tree is empty.
+        Parent department not found.
 
         ==== Campus Navigator ====
         1. View all facilities
