@@ -202,25 +202,10 @@ tbd
 
 ## Empty File
 
-* used an departments.txt file:
+* Department Load Summary
 
-* Error: Could not open departments.txt/buildings.txt
-* Error: Could not open departments/connections.txt
-
-       Warning: File "departments.txt/facilities.txt" failed to open.
-        Warning: File "departments.txt/departments.txt" failed to open.
-
-        ==== Campus Navigator ====
-        1. View all facilities
-        2. Search facility by ID
-        3. View campus graph
-        4. Display graph counts and degrees
-        5. Find reachable buildings (BFS)
-        6. Add department
-        7. Search department
-        8. Display department hierarchy
-        9. Run preorder traversal
-        10. Exit
+* loaded from departments from `departments.txt`
+* 8 Departments loaded and 0 rejected
 
    * **Results: passed**
 
