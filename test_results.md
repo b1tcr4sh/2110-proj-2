@@ -200,13 +200,25 @@ tbd
 
 # Test Results - Madison Lusk - Member C
 
-* Department Load Summary
+## Department Load Summary
 
 * loaded from departments from `departments.txt`
 * 8 Departments loaded and 0 rejected
 
    * **Results: passed**
 
+## Department Hierarchy
+
+* Ran code to type the departments and then ran the code to display them in their hiearchy
+* no issues in the leveling and they show correctly
+
+* **Results: passed**
+
+## Running Preorder traversal
+
+* Ran the code that would place each department in it's pre order position
+* No issues arised in the sorting
+ * **Results: passed**
 
 ## Add Department with unknown parent or duplicate name
 
