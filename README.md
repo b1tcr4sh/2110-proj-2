@@ -1,3 +1,3 @@
 # 2110-proj-2 - Smart Campus Navigation
 
-gh repo clone b1tcr4sh/2110-proj-2
+[2110 project 2 link](https://github.com/b1tcr4sh/2110-proj-2.git)
