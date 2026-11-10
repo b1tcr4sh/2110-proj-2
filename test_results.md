@@ -235,10 +235,10 @@ tbd
 
 * tested with "history" in parent department
 
-    Department name > Physics
-    Parent department > history
-    Department tree is empty.
-    Parent department not found.
+    * Department name > Physics
+    * Parent department > history
+    * Department tree is empty.
+    * Parent department not found.
 
         ==== Campus Navigator ====
         1. View all facilities
