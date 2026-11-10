@@ -24,3 +24,13 @@
 * Created Github repository
 * Contributed to branches: master, facilities, ui, file-loading, makefile, testing
 * Made 30 commits
+
+### Madison Lusk - Member C - Department Tree
+
+**Files** `DepartmentTree.h`, `DepartmentTree.cpp`, `DepartmentNode.h`, `DepartmentNode.cpp`
+
+* Created and implemented the code for the Department Tree and Node to add and search the departments.
+* Implemented the call cases in the main.cpp for adding, searching, and showing the hierarchy of the department tree.
+* Created the Preorder Traversal code for the Deparment Tree
+*Tested out the Department Tree and Node segements in the main.cpp and fixed any issues it had.
+* Made sure that the duplicates, blank files, blank user inputs, and Unknown Parent were rejected and did not go through 
