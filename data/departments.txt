@@ -6,3 +6,4 @@ Computer Science|College of Engineering
 Electrical Engineering|College of Engineering
 Mathematics|College of Science
 Physics|College of Science
+Physics|College of Science
