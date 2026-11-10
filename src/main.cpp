@@ -75,6 +75,7 @@ void searchFacilityById() { // take input and provde that to the hash table's fi
     }
 }
 
+
 void CreateDepartment() {
     string name;
     string parent;
@@ -88,10 +89,15 @@ void CreateDepartment() {
     getline(cin, parent);
 
     DepartmentNode* parentNode = DepartmentTrees.searchDepartment(parent);
+
     if (parentNode != nullptr) {
-        DepartmentTrees.addDepartment(parentNode, name);
-        cout << "Department created successfully!" << endl;
-    } else {
+        DepartmentNode* newDepartment = DepartmentTrees.addDepartment(parentNode, name);
+
+        if (newDepartment != nullptr) {
+            cout << "Department created successfully!" << endl;
+        }
+    }
+    else {
         cout << "Parent department not found." << endl;
     }
 }

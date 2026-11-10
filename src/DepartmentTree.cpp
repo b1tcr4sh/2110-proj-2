@@ -4,8 +4,18 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <algorithm>
+#include <cctype>
 
 using namespace std;
+string departmentToLowerCase(string text) {
+    transform(text.begin(), text.end(), text.begin(),
+        [](unsigned char c) {
+            return static_cast<char>(tolower(c));
+        });
+
+    return text;
+}
 
 void DepartmentTree::Load(string filename) {
     ifstream file(filename);
@@ -84,16 +94,24 @@ DepartmentNode* DepartmentTree::addDepartment(DepartmentNode* parent, string nam
         return nullptr;
     }
 
-    // creating a whole new department
+    if (parent == nullptr) {
+        cout << "Invalid parent department." << endl;
+        return nullptr;
+    }
+
+    // Check whether department already exists
+    if (searchDepartment(name) != nullptr) {
+        cout << "Department already exists." << endl;
+        return nullptr;
+    }
+
+    // Create the new department
     DepartmentNode* newDepartment = new DepartmentNode(name);
 
-    // setting the parent of the new department to the root
     newDepartment->parent = parent;
 
-    // adding the new department to the root's children list
     parent->children.push_back(newDepartment);
-    // cout << "Department added successfully." << endl;
-    
+
     return newDepartment;
 }
 
@@ -105,6 +123,8 @@ DepartmentNode* DepartmentTree::searchDepartment(string name) {
         return nullptr;
     }
 
+    string searchName = departmentToLowerCase(name);
+
     stack<DepartmentNode*> nodes;
     nodes.push(root);
 
@@ -112,7 +132,7 @@ DepartmentNode* DepartmentTree::searchDepartment(string name) {
         DepartmentNode* current = nodes.top();
         nodes.pop();
 
-        if (current->name == name) {
+        if (departmentToLowerCase(current->name) == searchName) {
             return current;
         }
 
