@@ -200,8 +200,6 @@ tbd
 
 # Test Results - Madison Lusk - Member C
 
-## Empty File
-
 * Department Load Summary
 
 * loaded from departments from `departments.txt`
