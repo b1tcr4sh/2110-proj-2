@@ -224,13 +224,6 @@ tbd
 
    * **Results: passed**
 
-## Malformed Line
-
-* tbh
-
-## Duplicate Record
-
-* tbh
 
 ## Add Department with unknown parent or duplicate name
 
