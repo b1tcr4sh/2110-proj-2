@@ -5,6 +5,6 @@
 
 # Group Mates
 
-Rylee Ford - Member A 
-Rylan Smith - Member B
-Madison Lusk - Member C
+ * Rylee Ford - Member A 
+ * Rylan Smith - Member B
+ * Madison Lusk - Member C
