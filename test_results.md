@@ -197,3 +197,26 @@ tbd
         Facilities Load Factor: 0.6
 
 * **Result: Passed**
+
+## Add Department with unknown parent or duplicate name
+
+* tested with "history" in parent department
+
+        Department name > Physics
+        Parent department > history
+        Department tree is empty.
+        Parent department not found.
+
+        ==== Campus Navigator ====
+        1. View all facilities
+        2. Search facility by ID
+        3. View campus graph
+        4. Display graph counts and degrees
+        5. Find reachable buildings (BFS)
+        6. Add department
+        7. Search department
+        8. Display department hierarchy
+        9. Run preorder traversal
+        10. Exit
+
+    * **results: passed**    
