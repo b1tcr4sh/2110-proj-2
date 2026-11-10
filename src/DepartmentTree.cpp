@@ -99,26 +99,29 @@ DepartmentNode* DepartmentTree::addDepartment(DepartmentNode* parent, string nam
 
 // searching the tree for each of the departments 
 
-DepartmentNode* DepartmentTree::searchDepartment(string name) { // perform a DFS to find a matching department
+DepartmentNode* DepartmentTree::searchDepartment(string name) {
     if (root == nullptr) {
         cout << "Department tree is empty." << endl;
         return nullptr;
     }
 
-    stack<DepartmentNode*> explored;
+    stack<DepartmentNode*> nodes;
+    nodes.push(root);
 
-    DepartmentNode* source = root; // start at the root
+    while (!nodes.empty()) {
+        DepartmentNode* current = nodes.top();
+        nodes.pop();
 
-    if (source->name == name) {
-        return source;
+        if (current->name == name) {
+            return current;
+        }
+
+        for (int i = current->children.size() - 1; i >= 0; i--) {
+            nodes.push(current->children[i]);
+        }
     }
 
-    DepartmentNode* result = SearchAncestors(source, name, explored); // recursively search each children
-    if (result == nullptr) {
-        cout << "not found" << endl;
-    }
-
-    return result;
+    return nullptr;
 }
 
 DepartmentNode* DepartmentTree::SearchAncestors(DepartmentNode* source, string name, stack<DepartmentNode*> &explored) {
@@ -156,22 +159,59 @@ DepartmentNode* DepartmentTree::SearchAncestors(DepartmentNode* source, string n
 // displaying the hierarchy for the departments
     
 void DepartmentTree::displayDepartmentHierarchy() {
-    cout << "Department Hierarchy:" << endl;
-    for (const auto& department : root->children) {
-        cout << "- " << department->name << endl;
+    if (root == nullptr) {
+        cout << "Department tree is empty." << endl;
+        return;
     }
-    cout << "End of Department Hierarchy." << endl;
-    cout << endl;
-}
 
+    cout << "Department Hierarchy:" << endl;
+
+    stack<pair<DepartmentNode*, int>> nodes;
+    nodes.push({ root, 0 });
+
+    while (!nodes.empty()) {
+        auto current = nodes.top();
+        nodes.pop();
+
+        DepartmentNode* department = current.first;
+        int level = current.second;
+
+        for (int i = 0; i < level; i++) {
+            cout << "    ";
+        }
+
+        cout << "- " << department->name << endl;
+
+        for (int i = department->children.size() - 1; i >= 0; i--) {
+            nodes.push({ department->children[i], level + 1 });
+        }
+    }
+
+    cout << "End of Department Hierarchy." << endl << endl;
+}
 // performing preorder traversal of the department tree with a DFS
 
 void DepartmentTree::preorderTraversal() {
-    cout << "Preorder Traversal:" << endl;
-    for (const auto& department : root->children) {
-        cout << "- " << department->name << endl;
+    if (root == nullptr) {
+        cout << "Department tree is empty." << endl;
+        return;
     }
-    cout << "End of Preorder Traversal." << endl;
-    cout << endl;
 
+    cout << "Preorder Traversal:" << endl;
+
+    stack<DepartmentNode*> nodes;
+    nodes.push(root);
+
+    while (!nodes.empty()) {
+        DepartmentNode* current = nodes.top();
+        nodes.pop();
+
+        cout << "- " << current->name << endl;
+
+        for (int i = current->children.size() - 1; i >= 0; i--) {
+            nodes.push(current->children[i]);
+        }
+    }
+
+    cout << "End of Preorder Traversal." << endl << endl;
 }
