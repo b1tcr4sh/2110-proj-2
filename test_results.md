@@ -240,7 +240,7 @@ tbd
     Department tree is empty.
     Parent department not found.
 
-    ==== Campus Navigator ====
+        ==== Campus Navigator ====
         1. View all facilities
         2. Search facility by ID
         3. View campus graph
