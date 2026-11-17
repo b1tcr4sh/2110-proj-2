@@ -58,6 +58,37 @@
 * Program rejected the invalid connections and displayed error messages with the line numbers.
 * **Result: Passed**
 
+### Shortest Path
+
+* Tested the shortest path from the Library to the Engineering Building.
+* Tested two buildings with multiple shortest routes to make sure the program followed the connection order.
+* **Result: Passed**
+
+### Shortest Path Edge Cases
+
+* Tested starting and destination buildings that were the same.
+* Verified that the program displayed 0 connections.
+* Tested an unknown starting building and an unknown destination building.
+* Tested buildings that had no path between them.
+* Confirmed that the program displayed the correct error messages and did not crash.
+* **Result: Passed**
+
+### Graph Connectivity Report
+
+* Tested the connectivity report using the campus building and connection data.
+* Verified that the program displayed 7 buildings and 6 connections.
+* Confirmed that Student Union had the highest degree of 3.
+* Verified that Observatory was listed as an isolated building.
+* Confirmed that the graph had 2 connected components.
+* **Result: Passed**
+
+### Menu Integration
+
+* Added options to find the shortest path and display the graph connectivity report.
+* Tested options 10, 11, and 12.
+* Confirmed that the shortest path and connectivity report displayed correctly and that Exit closed the program.
+* **Result: Passed**
+
 # Test Results - Rylee Ford - Member A
 
 ## Valid records, blank lines, comment lines, and records with too few or too many fields.

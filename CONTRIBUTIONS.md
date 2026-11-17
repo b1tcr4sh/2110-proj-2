@@ -10,6 +10,8 @@
 * Made building names work regardless of capitalization.
 * Added the graph display and statistics, including building degrees and total connections.
 * Implemented BFS to show which buildings can be reached and the distance from the starting building.
+* Added shortest path using BFS to find the shortest route between two buildings.
+* Added a connectivity report showing the number of buildings, connections, highest-degree buildings, isolated buildings, and connected components.
 * Tested the graph and fixed issues found during testing.
 
 ### Rylee Ford - Member A - Facilitie Hash Table

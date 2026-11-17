@@ -57,6 +57,25 @@ void graphBFS() {
     BuildingGraph.breadthFirstSearch(startBuilding);
 }
 
+// Gets the starting and destination buildings for shortest path
+void graphShortestPath() {
+    string startBuilding;
+    string destinationBuilding;
+
+    cout << "\nEnter starting building: ";
+    cin >> ws;
+    getline(cin, startBuilding);
+
+    cout << "Enter destination building: ";
+    getline(cin, destinationBuilding);
+
+    BuildingGraph.findShortestPath(startBuilding, destinationBuilding);
+}
+// Displays the graph connectivity report
+void graphConnectivityReport() {
+    BuildingGraph.displayConnectivityReport();
+}
+
 
 void searchFacilityById() { // take input and provde that to the hash table's find function
     string id;
@@ -149,7 +168,13 @@ bool HandleInut(string inputStr) { // take in raw input, process it, and handle 
         case 9: // run preorder traversal
             DepartmentTrees.preorderTraversal();
             return true;
-        case 10: // exit
+        case 10: // find shortest path
+            graphShortestPath();
+            return true;
+        case 11: // display graph connectivity report
+            graphConnectivityReport();
+            return true;
+        case 12: // exit
             return false;
         default: // unhandeled input
             cout << "input not recognized: " << input << endl;
@@ -168,7 +193,9 @@ void PrintMenu() { // what it says
     cout << "7. Search department" << endl;
     cout << "8. Display department hierarchy" << endl;
     cout << "9. Run preorder traversal" << endl;
-    cout << "10. Exit" << endl << endl;
+    cout << "10. Find shortest path" << endl;
+    cout << "11. Display graph connectivity report" << endl;
+    cout << "12. Exit" << endl << endl;
 }
 
 int main(int argc, char *argv[]) {

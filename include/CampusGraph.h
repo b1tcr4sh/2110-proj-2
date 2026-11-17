@@ -20,6 +20,8 @@ public:
 	void displayGraph() const;
 	void displayStatistics() const;
 	void breadthFirstSearch(const string& startBuilding) const;
+	void findShortestPath(const string& startBuilding, const string& destinationBuilding) const;
+	void displayConnectivityReport() const;
 };
 
 #endif
