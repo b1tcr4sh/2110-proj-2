@@ -72,7 +72,7 @@ void FacilityTable::Load(string filename) { // load the facilities.txt file, pro
     cout << "Facility Collisions: " << collisions << endl;
     cout << "Number of Chains: " << size << endl;
     cout << "Number of Facilities Stored: " << total << endl;
-    cout << "Facilities Load Factor: " << LoadFactor() << endl;
+    cout << "Facilities Load Factor: " << LoadFactor() << endl << endl;
 }
 
 Facility FacilityTable::Find(string id) { // search for a key in a bucket by hashing it, then searching the bucket to find the entry
