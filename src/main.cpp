@@ -147,34 +147,48 @@ bool HandleInut(string inputStr) { // take in raw input, process it, and handle 
         case 2: // search facility by ID
             searchFacilityById();
             return true;
-        case 3: // view campus graph
+        case 3:
+            // search facility by name
+            return true;
+        case 4:
+            // search facility by category
+            return true;
+        case 5: // view campus graph
             BuildingGraph.displayGraph();
             return true;
-        case 4: // display graph counts and degrees
+        case 6: // display graph counts and degrees
             BuildingGraph.displayStatistics();
             return true;
-        case 5: // BFS
+        case 7: // Find reachable buildings (BFS)
             graphBFS();
             return true;
-        case 6: // add department 
-            CreateDepartment();
-            return true;
-        case 7: // search department
-            SearchForDepartment();
-            return true;
-        case 8: // display department hierarchy
-            DepartmentTrees.displayDepartmentHierarchy();
-            return true;
-        case 9: // run preorder traversal
-            DepartmentTrees.preorderTraversal();
-            return true;
-        case 10: // find shortest path
+        case 8: // Find shortest path (BFS)
             graphShortestPath();
             return true;
-        case 11: // display graph connectivity report
+        case 9: // add department 
+            CreateDepartment();
+            return true;
+        case 10: // search department
+            SearchForDepartment();
+            return true;
+        case 11: // display department hierarchy
+            DepartmentTrees.displayDepartmentHierarchy();
+            return true;
+        case 12: // run preorder traversal
+            DepartmentTrees.preorderTraversal();
+            return true;
+        case 13: // run postorder traversal
+            return true;
+        case 14: // run level-order traversal
+            return true;
+        case 15: // department statistics
+            return true;
+        case 16: // Facility category report
+            return true;
+        case 17: // display graph connectivity report
             graphConnectivityReport();
             return true;
-        case 12: // exit
+        case 18: // exit
             return false;
         default: // unhandeled input
             cout << "input not recognized: " << input << endl;
@@ -186,16 +200,22 @@ void PrintMenu() { // what it says
     cout << "==== Campus Navigator ====" << endl;
     cout << "1. View all facilities" << endl;
     cout << "2. Search facility by ID" << endl;
-    cout << "3. View campus graph" << endl;
-    cout << "4. Display graph counts and degrees" << endl;
-    cout << "5. Find reachable buildings (BFS)" << endl;
-    cout << "6. Add department" << endl;
-    cout << "7. Search department" << endl;
-    cout << "8. Display department hierarchy" << endl;
-    cout << "9. Run preorder traversal" << endl;
-    cout << "10. Find shortest path" << endl;
-    cout << "11. Display graph connectivity report" << endl;
-    cout << "12. Exit" << endl << endl;
+    cout << "3. Search facility by name" << endl;
+    cout << "4. Search facility by category" << endl;
+    cout << "5. View campus graph" << endl;
+    cout << "6. Display graph counts and degrees" << endl;
+    cout << "7. Find reachable buildings (BFS)" << endl;
+    cout << "8. Find shortest path (BFS)" << endl;
+    cout << "9. Add department" << endl;
+    cout << "10. Search department" << endl;
+    cout << "11. Display department hierarchy" << endl;
+    cout << "12. Run preorder traversal" << endl;
+    cout << "13. Run postorder traversal" << endl;
+    cout << "14. Run level-order traversal" << endl;
+    cout << "15. Department statistics" << endl;
+    cout << "16. Facility category report" << endl;
+    cout << "17. Display graph connectivity report" << endl;
+    cout << "18. Exit" << endl << endl;
 }
 
 int main(int argc, char *argv[]) {

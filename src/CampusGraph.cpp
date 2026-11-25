@@ -462,7 +462,7 @@ void CampusGraph::displayConnectivityReport() const {
 
     for (unsigned int i = 0; i < buildings.size(); i++) {
 
-        if (adjacencyList[i].size() == highestDegree) {
+        if ((int) adjacencyList[i].size() == highestDegree) {
             cout << buildings[i] << " ";
         }
     }
