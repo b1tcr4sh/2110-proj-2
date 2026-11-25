@@ -19,12 +19,18 @@ class FacilityTable { // stores all facilities as a hash table
         Facility FindByID(string id); // find a specific facility; combination of a hashing function and linear search that returns a copy so we don't break the hash table
         int FindByName(string name, vector<Facility> &found); // find a all facilities with a name; has to be a linear search through the entire tabler; populates found with copies so we don't break the hash table; returns number of matches
         int FindByCategory(string category, vector<Facility> &found); // find all facilities in a category; has to be a linear search through the entire table; populates found with copies so we don't break the hash table; returns number of matches
+        int FindByCategory(string category); // find the number of facilities in a category
         void ListAll(); // list every entry in the table
         float LoadFactor(); // compute the load factor
+
+        int getTotal(); // get the number of facilities in the table
+        
+        vector<string> categories; // list of categories (the first spelling of each)
     private:
         const int multiplier = 33;
         const int startingValue = 5381;
         int size; // number of buckets in the table
+        int total; // number of facilities in the table
 
         FacilityChain* hash(string id); // hash function that returns a chain (bucket) to operate on
         vector<FacilityChain*> table; // vector that contains chains; there are as many as size

@@ -15,6 +15,7 @@ class FacilityChain { // wrapper for linked list
         Facility* LinearSearch(string id); // finds based on key (for chained elements)
         int LinearSearchByName(string name, vector<Facility> &found); // finds based on name; populates found with matches; returns number of matches
         int LinearSearchByCategory(string category, vector<Facility> &found); // finds based on category; populates found with matches; returns number of matches
+        int LinearSearchByCategory(string category); // finds based on category; returns number of matches
         void removeFromList(Facility* fac); // helper function to remove from the list
         void ListAll(); // list all elements in the chain
         int Size(); // get the size

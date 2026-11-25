@@ -138,6 +138,27 @@ int FacilityChain::LinearSearchByCategory(string category, vector<Facility> &fou
     return matches; // return the number of matches we found
 }
 
+int FacilityChain::LinearSearchByCategory(string category) { // find the number of facilities in this chain in a category
+    if (head == NULL) return 0; // if the list is empty, exit early
+
+    int matches = 0;
+    Facility* temp = head;
+
+    while (temp != tail) {
+        if (Files::to_lower(temp->category) == category) { // if the cat matches
+            matches++; // and increment matches
+        }
+
+        temp = temp->next;
+    }
+
+    if (Files::to_lower(tail->category) == category) { // if the tail matches
+        matches++; // and increment matches
+    }
+
+    return matches; // return the number of matches we found
+}
+
 void FacilityChain::ListAll() { // enumerate the list
     if (size == 0) { // if the head is not set then this chain is empty,
         return; // so we can exit early

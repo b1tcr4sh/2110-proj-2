@@ -2,6 +2,7 @@
 // purpose: handles loading the files and is an intermediate between user input and the various systems in the program
 
 #include <cctype>
+#include <cstdio>
 #include <iostream>
 #include <vector>
 #include "../include/CampusGraph.h"
@@ -157,11 +158,28 @@ void searchFacilityByCategory() {
     }
 
     cout << endl << "===== " << numMatches << " Facilities in Category \"" << category << "\" =====" << endl;
-    cout << numMatches << " matches:" << endl;
     for (int i = 0; i < numMatches; i++) { // otherwise, loop through all the matches
         cout << endl << matches.at(i).name << ": " << matches.at(i).id << endl; // and print their info
         cout << " Located at: " << matches.at(i).building << endl;
         cout << " Category: " << matches.at(i).category << endl;
+    }
+}
+
+void categoryReport() {
+    cout << endl << "===== FACILITY CATEGORY REPORT =====" << endl;
+
+    cout << FacilityHashTable.categories.size() << " categories: " << endl << endl;
+
+    if (FacilityHashTable.categories.size() == 0) { // if there are 0 categories
+        return; // then escape
+    }
+
+    for (int i = 0; i < (int) FacilityHashTable.categories.size(); i++) { // for each category we have seen
+        int num = FacilityHashTable.FindByCategory(FacilityHashTable.categories.at(i)); // get the number of matches for this category
+    
+        float percent = ( (float) 100 / FacilityHashTable.getTotal() ) * num; // calculate percentage
+
+        printf("%s: contains %d facilities: %.1f%% of all facilities\n", FacilityHashTable.categories.at(i).c_str(), num, percent);
     }
 }
 
@@ -254,6 +272,7 @@ bool HandleInut(string inputStr) { // take in raw input, process it, and handle 
         case 15: // department statistics
             return true;
         case 16: // Facility category report
+            categoryReport();
             return true;
         case 17: // display graph connectivity report
             graphConnectivityReport();

@@ -128,11 +128,38 @@ int FacilityTable::FindByCategory(string category, vector<Facility> &found) {// 
     return matches; // return the number of matches we found
 }
 
+int FacilityTable::FindByCategory(string category) {  // find the number of facilities in a category
+    category = Files::to_lower(category); // lowercase the category for matching
+    int matches = 0;
+
+    for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
+        FacilityChain* chain = table.at(i);
+        if (chain == NULL) { // if chain is not initialized
+            continue; // then skip it
+        }
+        matches += chain->LinearSearchByCategory(category); // increase matches by the amount found
+    }
+
+    return matches; // return the number of matches we found
+}
+
 bool FacilityTable::Create(string id, string name, string building, string category) { // create a facility entry and insert it into the chain
     id = normalize(id); // normalize the key
 
     if (!isValid(id)) { // if the format of the id is invalid,
         return false; // then exit early and state rejection
+    }
+
+    bool categoryExists = false;
+    for (int i = 0; i < categories.size(); i++) { // look through all stored categories
+        if (Files::to_lower(categories.at(i)) == Files::to_lower(category)) { // if some variation of the capatilization of this category already exists
+            category = categories.at(i); // then set the category to be that capitalization
+            categoryExists = true;
+        }
+    }
+
+    if (!categoryExists) { // otherwise
+        categories.push_back(category); // add this category to the list
     }
 
     Facility* newFac = new Facility(id, name, building, category);
@@ -145,6 +172,7 @@ bool FacilityTable::Create(string id, string name, string building, string categ
     }
     
     bucket->appendToList(newFac); // append to bucket
+    total++;
     return true;
 }
 
@@ -154,6 +182,7 @@ void FacilityTable::Remove(string id) { // remove an entry from the table
 
     Facility* fac = bucket->LinearSearch(id); // find the correct element in the bucket
     bucket->removeFromList(fac); // and remove it
+    total--;
 }
 
 FacilityChain* FacilityTable::hash(string id) { // hashing wrapper function that gets the index of the hashed key and returns a reference to the appropriate chain
@@ -217,4 +246,8 @@ float FacilityTable::LoadFactor() { // computes and returns the current load fac
     }
 
     return (float) sum / (float) size; 
+}
+
+int FacilityTable::getTotal() {
+    return total;
 }
