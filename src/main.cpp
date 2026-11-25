@@ -127,7 +127,7 @@ void searchFacilityByName() {
         return; // and escape early
     }
 
-    cout << endl << "===== Facilities With Name \"" << name << "\" =====" << endl;
+    cout << endl << "===== " << numMatches << " Facilities With Name \"" << name << "\" =====" << endl;
     for (int i = 0; i < numMatches; i++) { // otherwise, loop through all the matches
         cout << endl << matches.at(i).name << ": " << matches.at(i).id << endl; // and print their info
         cout << " Located at: " << matches.at(i).building << endl;
@@ -156,7 +156,8 @@ void searchFacilityByCategory() {
         return; // and escape early
     }
 
-    cout << endl << "===== Facilities in Category \"" << category << "\" =====" << endl;
+    cout << endl << "===== " << numMatches << " Facilities in Category \"" << category << "\" =====" << endl;
+    cout << numMatches << " matches:" << endl;
     for (int i = 0; i < numMatches; i++) { // otherwise, loop through all the matches
         cout << endl << matches.at(i).name << ": " << matches.at(i).id << endl; // and print their info
         cout << " Located at: " << matches.at(i).building << endl;

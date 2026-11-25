@@ -15,6 +15,12 @@ FacilityTable::FacilityTable(int size) { // basic constructor that defines the n
     }
 }
 
+FacilityTable::~FacilityTable() { // delete all of the stored chains (thus deleting all of the facilities themselves)
+    for (int i = 0; i < size; i++) { // go through each chain
+        delete table.at(i); // and delete it
+    }
+}
+
 void FacilityTable::Load(string filename) { // load the facilities.txt file, process, and store it's input
     ifstream file(filename);
 

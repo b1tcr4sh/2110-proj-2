@@ -5,6 +5,17 @@
 #include "../include/FacilityChain.h"
 #include "../include/Files.h"
 
+FacilityChain::~FacilityChain() {
+    Facility* temp = head;
+
+    while (temp != tail) { // loop through all until we find the tail
+        delete temp; // delete
+        temp = temp->next; // and iterate
+    }
+
+    delete temp; // this should now be the tail, so we can delete it too
+}
+
 void FacilityChain::appendToList(Facility* fac) { // append an element to the linked list no questions asked
     if (head != NULL) { // if list already has elements in it,
         tail->next = fac; // then append the element to the end of list

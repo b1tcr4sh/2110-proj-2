@@ -10,6 +10,7 @@
 
 class FacilityChain { // wrapper for linked list
     public:
+        ~FacilityChain(); // free up memory by deleting all stored facilities
         void appendToList(Facility* fac); // append to the list
         Facility* LinearSearch(string id); // finds based on key (for chained elements)
         int LinearSearchByName(string name, vector<Facility> &found); // finds based on name; populates found with matches; returns number of matches

@@ -10,7 +10,8 @@
 
 class FacilityTable { // stores all facilities as a hash table
     public:
-        FacilityTable(int size);
+        FacilityTable(int size); // basic constructor that defines the number of buckets the table will have
+        ~FacilityTable(); // delete all of the stored chains (thus deleting all of the facilities themselves)
 
         void Load(string filename); // load from file
         bool Create(string id, string name, string building, string category); // insert a new element into the table (this function will actually create the facility)
