@@ -87,7 +87,6 @@ Facility FacilityTable::FindByID(string id) { // search for a key in a bucket by
     Facility* fac = bucket->LinearSearch(id); // search the bucket to find the element
 
     if (fac == NULL) { // if it wasn't found in bucket
-        // cout << "Not found: no facility with ID " << id << endl;
         return Facility("null", "null", "null", "null"); // then exit
     }
 

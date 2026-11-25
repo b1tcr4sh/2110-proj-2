@@ -3,9 +3,11 @@
 
 #include <cctype>
 #include <iostream>
+#include <vector>
 #include "../include/CampusGraph.h"
 #include "../include/FacilityTable.h"
 #include "../include/DepartmentTree.h"
+#include "../include/Files.h"
 
 using namespace std;
 
@@ -14,15 +16,23 @@ FacilityTable FacilityHashTable(50); // initialize the hash table for storing fa
 DepartmentTree DepartmentTrees;
 
 
-bool FieldInputValidString(unsigned int length, string input) { // helper function to standardize and handle errors for numeric input fields
-    if (input.size() > length || input.size() < 1) { // if the string is empty or too long
-        cout << "malformed input: " << input << ": input should be more than 0 characters and less than " << length << " characters." << endl; // print an error
-        return false; // and exit early
+bool FieldInputValidString(int length, string input) { // helper function to standardize and handle errors for numeric input fields
+    if (length != -1) {
+        if ((int) input.size() > length || input.size() < 1) { // if the string is empty or too long
+            cout << "malformed input: " << input << ": input should be more than 0 characters and less than " << length << " characters." << endl; // print an error
+            return false; // and exit early
+        }
+    } else {
+        if ((int) input.size() < 1) { // if the string is empty
+            cout << "malformed input: " << input << ": input should be more than 0 characters." << endl; // print an error
+            return false; // and exit early
+        }
     }
+    
 
     for (char c : input) { // for every character
-        if (!isalnum(c) || c == ' ') { // if it's not alphanumeric or a space
-            cout << "malformed input: " << input << ": input should be a number." << endl; // print an error
+        if (!isalnum(c) && c != ' ') { // if it's not alphanumeric and not a space
+            cout << "malformed input: " << input << ": input contains invalid characters." << endl; // print an error
             return false; // and exit early
         }
     }
@@ -91,10 +101,68 @@ void searchFacilityById() { // take input and provde that to the hash table's fi
         cout << endl << fac.name << ": " << fac.id << endl; // then print it's info
         cout << " Located at: " << fac.building << endl;
         cout << " Category: " << fac.category << endl;
+    } else {
+        cout << "Not found: no facility with ID " << id << endl;
     }
 }
 
+void searchFacilityByName() {
+    string name;
 
+    cout << endl << "enter name :" << endl;
+    cin >> ws;
+
+    getline(cin, name);
+    Files::trim(name);
+
+    if (!FieldInputValidString(-1, name)) { // if the string is invalid
+        return; // then return
+    }
+
+    vector<Facility> matches;
+    int numMatches = FacilityHashTable.FindByName(name, matches);
+
+    if (numMatches < 1) { // if no matches were found
+        cout << endl << "Not found: no facility with name " << name << endl; // print an error
+        return; // and escape early
+    }
+
+    cout << endl << "===== Facilities With Name \"" << name << "\" =====" << endl;
+    for (int i = 0; i < numMatches; i++) { // otherwise, loop through all the matches
+        cout << endl << matches.at(i).name << ": " << matches.at(i).id << endl; // and print their info
+        cout << " Located at: " << matches.at(i).building << endl;
+        cout << " Category: " << matches.at(i).category << endl;
+    }
+}
+
+void searchFacilityByCategory() {
+    string category;
+
+    cout << endl << "enter category :" << endl;
+    cin >> ws;    
+
+    getline(cin, category);
+    Files::trim(category);
+
+    if (!FieldInputValidString(-1, category)) { // if the string is invalid
+        return; // then return
+    }
+
+    vector<Facility> matches;
+    int numMatches = FacilityHashTable.FindByCategory(category, matches);
+
+    if (numMatches < 1) { // if no matches were found
+        cout << endl << "Not found: no facility in category " << category << endl; // print an error
+        return; // and escape early
+    }
+
+    cout << endl << "===== Facilities in Category \"" << category << "\" =====" << endl;
+    for (int i = 0; i < numMatches; i++) { // otherwise, loop through all the matches
+        cout << endl << matches.at(i).name << ": " << matches.at(i).id << endl; // and print their info
+        cout << " Located at: " << matches.at(i).building << endl;
+        cout << " Category: " << matches.at(i).category << endl;
+    }
+}
 
 void CreateDepartment() {
     string name;
@@ -148,11 +216,11 @@ bool HandleInut(string inputStr) { // take in raw input, process it, and handle 
         case 2: // search facility by ID
             searchFacilityById();
             return true;
-        case 3:
-            // search facility by name
+        case 3: // search facility by name
+            searchFacilityByName();
             return true;
-        case 4:
-            // search facility by category
+        case 4: // search facility by category
+            searchFacilityByCategory();
             return true;
         case 5: // view campus graph
             BuildingGraph.displayGraph();
@@ -235,6 +303,7 @@ int main(int argc, char *argv[]) {
     while (cont) { // loop until program end; makes sure that user gets prompted with a new menu after each operaiton
         cout << endl;
         PrintMenu(); // print the menu
+        cout << " > ";
         cin >> input;
         
         cont = HandleInut(input); // take user input and do things with it
