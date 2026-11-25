@@ -85,7 +85,7 @@ void searchFacilityById() { // take input and provde that to the hash table's fi
         return; // then return
     }
 
-    Facility fac = FacilityHashTable.Find(id); // otherwise, find the facility
+    Facility fac = FacilityHashTable.FindByID(id); // otherwise, find the facility
 
     if (fac.name != "null") { // if it can be found
         cout << endl << fac.name << ": " << fac.id << endl; // then print it's info
@@ -93,6 +93,7 @@ void searchFacilityById() { // take input and provde that to the hash table's fi
         cout << " Category: " << fac.category << endl;
     }
 }
+
 
 
 void CreateDepartment() {

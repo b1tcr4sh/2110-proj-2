@@ -75,7 +75,7 @@ void FacilityTable::Load(string filename) { // load the facilities.txt file, pro
     cout << "Facilities Load Factor: " << LoadFactor() << endl << endl;
 }
 
-Facility FacilityTable::Find(string id) { // search for a key in a bucket by hashing it, then searching the bucket to find the entry
+Facility FacilityTable::FindByID(string id) { // search for a key in a bucket by hashing it, then searching the bucket to find the entry
     id = normalize(id); // normalize the key
 
     if (!isValid(id)) { // if the key is formatted incorrectly,
@@ -92,6 +92,27 @@ Facility FacilityTable::Find(string id) { // search for a key in a bucket by has
     }
 
     return *fac; // otherwise, return a copy of it
+}
+
+int FacilityTable::FindByName(string name, vector<Facility> &found) {// find a all facilities with a name; has to be a linear search through the entire tabler; returns copies so we don't break the hash table
+    int total = 0;
+
+    for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
+        FacilityChain* chain = table.at(i);
+        if (chain == NULL) { // if chain contains nothing
+            continue; // then skip it
+        }
+
+
+        for (unsigned int j = 0; j < chain->Size(); j++) {
+
+        }
+    }
+
+
+}
+int FacilityTable::FindByCategory(string category, vector<Facility> &found) {// find all facilities in a category; has to be a linear search through the entire table; returns copies so we don't break the hash table
+
 }
 
 bool FacilityTable::Create(string id, string name, string building, string category) { // create a facility entry and insert it into the chain
@@ -149,7 +170,7 @@ void FacilityTable::ListAll() { // iterate through each chain in the table and p
     for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
         FacilityChain* chain = table.at(i);
         if (chain == NULL) {
-            cout << "chain uninitialized.." << endl;
+            // cout << "chain uninitialized.." << endl;
             return;
         }
         chain->ListAll(); // and list it

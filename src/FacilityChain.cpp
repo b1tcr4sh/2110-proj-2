@@ -80,6 +80,33 @@ Facility* FacilityChain::LinearSearch(string id) { // perform a linear search on
     return NULL; // couldn't find, so we return NULL
 }
 
+int FacilityChain::LinearSearchByName(string name, vector<Facility*> &found) { // finds based on name; populates found with matches; returns number of matches
+    if (head == NULL) return 0; // if the list is empty, exit early
+
+    int matches = 0;
+    Facility* temp = head;
+
+    while (temp != tail) {
+        if (temp->name == name) { // if the name matches
+            found.push_back(temp); // then add it to the list
+            matches++; // and increment matches
+        }
+
+        temp = temp->next;
+    }
+
+    if (tail->name == name) { // if the tail matches
+        found.push_back(tail); // then add it to the list
+        matches++; // and increment matches
+    }
+
+    return 0; // couldn't find, so we return 0
+
+}
+
+int FacilityChain::LinearSearchByCategory(string category, vector<Facility*> &found) { // finds based on category; populates found with matches; returns number of matches
+}
+
 void FacilityChain::ListAll() { // enumerate the list
     if (size == 0) { // if the head is not set then this chain is empty,
         return; // so we can exit early
