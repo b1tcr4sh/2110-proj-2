@@ -95,24 +95,32 @@ Facility FacilityTable::FindByID(string id) { // search for a key in a bucket by
 }
 
 int FacilityTable::FindByName(string name, vector<Facility> &found) {// find a all facilities with a name; has to be a linear search through the entire tabler; returns copies so we don't break the hash table
-    int total = 0;
+    name = Files::to_lower(name); // lowercase the name for matching
+    int matches = 0;
 
     for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
         FacilityChain* chain = table.at(i);
-        if (chain == NULL) { // if chain contains nothing
+        if (chain == NULL) { // if chain is not initialized
             continue; // then skip it
         }
-
-
-        for (unsigned int j = 0; j < chain->Size(); j++) {
-
-        }
+        matches += chain->LinearSearchByName(name, found); // increase matches by the amount found and append all the matches from the chain
     }
 
-
+    return matches; // return the number of matches we found
 }
 int FacilityTable::FindByCategory(string category, vector<Facility> &found) {// find all facilities in a category; has to be a linear search through the entire table; returns copies so we don't break the hash table
+    category = Files::to_lower(category); // lowercase the category for matching
+    int matches = 0;
 
+    for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
+        FacilityChain* chain = table.at(i);
+        if (chain == NULL) { // if chain is not initialized
+            continue; // then skip it
+        }
+        matches += chain->LinearSearchByCategory(category, found); // increase matches by the amount found and append all the matches from the chain
+    }
+
+    return matches; // return the number of matches we found
 }
 
 bool FacilityTable::Create(string id, string name, string building, string category) { // create a facility entry and insert it into the chain
