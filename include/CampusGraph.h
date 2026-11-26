@@ -13,6 +13,8 @@ private:
 	vector<vector<int>> adjacencyList;
 
 public:
+	bool buildingExists(string name);
+
 	void addBuilding(const string& buildingID);
 	bool loadBuildings(const string& filename);
 	bool loadConnections(const string& filename);

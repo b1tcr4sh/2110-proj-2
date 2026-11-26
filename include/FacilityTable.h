@@ -7,14 +7,15 @@
 #include <vector>
 #include "Facility.h"
 #include "FacilityChain.h"
+#include "CampusGraph.h"
 
 class FacilityTable { // stores all facilities as a hash table
     public:
-        FacilityTable(int size); // basic constructor that defines the number of buckets the table will have
+        FacilityTable(int size, CampusGraph* graph); // basic constructor that defines the number of buckets the table will have and stores a reference to the campus graph
         ~FacilityTable(); // delete all of the stored chains (thus deleting all of the facilities themselves)
 
         void Load(string filename); // load from file
-        bool Create(string id, string name, string building, string category); // insert a new element into the table (this function will actually create the facility)
+        bool Create(string id, string name, string building, string category, int lineNumber); // insert a new element into the table (this function will actually create the facility)
         void Remove(string id); // find the facility and remove it
         Facility FindByID(string id); // find a specific facility; combination of a hashing function and linear search that returns a copy so we don't break the hash table
         int FindByName(string name, vector<Facility> &found); // find a all facilities with a name; has to be a linear search through the entire tabler; populates found with copies so we don't break the hash table; returns number of matches
@@ -31,6 +32,8 @@ class FacilityTable { // stores all facilities as a hash table
         const int startingValue = 5381;
         int size; // number of buckets in the table
         int total; // number of facilities in the table
+
+        CampusGraph* buildingsGraph; // store a reference to the campus graph for checking buildings
 
         FacilityChain* hash(string id); // hash function that returns a chain (bucket) to operate on
         vector<FacilityChain*> table; // vector that contains chains; there are as many as size

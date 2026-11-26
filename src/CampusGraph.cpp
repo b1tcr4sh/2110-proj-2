@@ -1,4 +1,5 @@
 #include "../include/CampusGraph.h"
+#include "../include/Files.h"
 #include <iostream>
 #include <fstream>
 #include <algorithm>
@@ -232,7 +233,7 @@ bool CampusGraph::loadBuildings(const string& filename) {
     cout << "\n===== BUILDING LOAD SUMMARY =====\n";
     cout << "File: " << filename << endl;
     cout << "Buildings loaded: " << loaded << endl;
-    cout << "Buildings rejected: " << rejected << endl;
+    cout << "Buildings rejected: " << rejected << endl << endl;
 
     return true;
 }
@@ -328,7 +329,7 @@ bool CampusGraph::loadConnections(const string& filename) {
     inputFile.close();
 
     // Show how many connections were added and rejected
-    cout << "\n===== CONNECTION LOAD SUMMARY =====\n";
+    cout << "===== CONNECTION LOAD SUMMARY =====\n";
     cout << "File: " << filename << endl;
     cout << "Connections loaded: " << loaded << endl;
     cout << "Connections rejected: " << rejected << endl;
@@ -519,4 +520,17 @@ void CampusGraph::displayConnectivityReport() const {
     }
 
     cout << "Connected components: " << components << endl;
+}
+
+bool CampusGraph::buildingExists(string name) {
+    name = Files::trim(name); // trim
+    name = Files::to_lower(name); // and set the name lowercase
+
+    for (int i = 0; i < (int) buildings.size(); i++) { // step through every building so far
+        if (Files::to_lower(buildings.at(i)) == name) { // and if we find a match
+            return true; // then state it
+        }
+    }
+
+    return false; // otherwise, no match
 }

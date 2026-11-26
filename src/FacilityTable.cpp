@@ -3,16 +3,19 @@
 
 #include <fstream>
 #include <iostream>
+#include <random>
 #include <vector>
 #include "../include/FacilityTable.h"
 #include "../include/Files.h"
 
-FacilityTable::FacilityTable(int size) { // basic constructor that defines the number of buckets the table will have
+FacilityTable::FacilityTable(int size, CampusGraph* graph) { // basic constructor that defines the number of buckets the table will have
     this->size = size;
 
     for (int i = 0; i < size; i++) { // fill table with empty chains
         table.push_back(new FacilityChain);
     }
+
+    this->buildingsGraph = graph;
 }
 
 FacilityTable::~FacilityTable() { // delete all of the stored chains (thus deleting all of the facilities themselves)
@@ -59,7 +62,7 @@ void FacilityTable::Load(string filename) { // load the facilities.txt file, pro
             continue;
         }
 
-        if (Create(id, name, building, category)) loaded++; // if it is succesfully created and added to the table, then incremend the number of loaded records
+        if (Create(id, name, building, category, lineNumber)) loaded++; // if it is succesfully created and added to the table, then incremend the number of loaded records
         else rejected++; // otherwise, increment the number of rejected records
     }
 
@@ -143,7 +146,7 @@ int FacilityTable::FindByCategory(string category) {  // find the number of faci
     return matches; // return the number of matches we found
 }
 
-bool FacilityTable::Create(string id, string name, string building, string category) { // create a facility entry and insert it into the chain
+bool FacilityTable::Create(string id, string name, string building, string category, int lineNumber) { // create a facility entry and insert it into the chain
     id = normalize(id); // normalize the key
 
     if (!isValid(id)) { // if the format of the id is invalid,
@@ -162,12 +165,17 @@ bool FacilityTable::Create(string id, string name, string building, string categ
         categories.push_back(category); // add this category to the list
     }
 
+    if (!buildingsGraph->buildingExists(building)) { // if the building doesn't exist
+        cout << "Building does not exist: " << building << ": line: " << lineNumber << endl; // then print an error
+        return false; // and return early and state rejection
+    }
+
     Facility* newFac = new Facility(id, name, building, category);
 
     FacilityChain* bucket = hash(newFac->id); // hash the key and get the bucket to append into
     
     if (bucket->LinearSearch(id) != NULL) { // if this bucket already contains this id
-        cout << "Duplicate facility id: " << id << endl; // then print an error 
+        cout << "Duplicate facility id: " << id << ": line: " << lineNumber << endl; // then print an error 
         return false; // and return early and state rejection
     }
     
