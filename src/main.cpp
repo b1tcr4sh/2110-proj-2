@@ -266,8 +266,10 @@ bool HandleInut(string inputStr) { // take in raw input, process it, and handle 
             DepartmentTrees.preorderTraversal();
             return true;
         case 13: // run postorder traversal
+            DepartmentTrees.postorderTraversal();
             return true;
         case 14: // run level-order traversal
+            DepartmentTrees.LevelOrderTraversal();
             return true;
         case 15: // department statistics
             return true;

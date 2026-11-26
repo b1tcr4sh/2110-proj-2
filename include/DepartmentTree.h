@@ -17,6 +17,8 @@ class DepartmentTree{
   DepartmentNode* searchDepartment(string name); // take in name to search for, return the found record
   void displayDepartmentHierarchy();
   void preorderTraversal();
+  void postorderTraversal();
+  void LevelOrderTraversal();
 
   private:
       DepartmentNode* root = nullptr;
