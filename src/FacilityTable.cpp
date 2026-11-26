@@ -151,7 +151,7 @@ bool FacilityTable::Create(string id, string name, string building, string categ
     }
 
     bool categoryExists = false;
-    for (int i = 0; i < categories.size(); i++) { // look through all stored categories
+    for (int i = 0; i < (int) categories.size(); i++) { // look through all stored categories
         if (Files::to_lower(categories.at(i)) == Files::to_lower(category)) { // if some variation of the capatilization of this category already exists
             category = categories.at(i); // then set the category to be that capitalization
             categoryExists = true;
