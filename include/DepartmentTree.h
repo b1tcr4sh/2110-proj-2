@@ -19,6 +19,7 @@ class DepartmentTree{
   void preorderTraversal();
   void postorderTraversal();
   void LevelOrderTraversal();
+  void DepartmentStatistics();
 
   private:
       DepartmentNode* root = nullptr;
