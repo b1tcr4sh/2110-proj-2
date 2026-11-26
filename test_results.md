@@ -518,7 +518,7 @@ and buildings.txt:
 
 * both yield the same collision count: 1
 * **case 1 results:**
-    - *expected output:* facilities loads 2 rejects 1. Line 3 rejects as duplicate. There is 1 collision because there is only 1 bucket.
+    - *expected output:* facilities loads 2 rejects 1. Line 3 rejects as duplicate. There is 1 collision because there is Madisononly 1 bucket.
     - *actual output:* 
 
         Duplicate facility id: F010: line: 3
@@ -549,8 +549,92 @@ and buildings.txt:
 
 * **Result: Passed**
 
+## Multiple facilities with the same name; name and category searches that match, do not match, and ignore capitalization.
 
+* tested with facilities.txt:
 
+                F001|Main Reading Room|Library|Library
+                F002|Main Reading Room|Library|Library
+                F003|main reading room|Library|library
+                F004|mAIN rEADING rOOM|Library|lIBRARY
+
+* buildings.txt: 
+
+                Library
+
+* command: './proj2.out testdata'
+
+### name searches:
+
+**case 1**
+
+* program selection: 3 (Search By Name)
+* search input: 'main reading room'
+
+* *expected output:* search finds all 4 entries
+* *actual output*: 
+
+                ===== 4 Facilities With Name "main reading room" =====
+
+                Main Reading Room: F001
+                Located at: Library
+                Category: Library
+
+                Main Reading Room: F002
+                Located at: Library
+                Category: Library
+
+                main reading room: F003
+                Located at: Library
+                Category: Library
+
+                mAIN rEADING rOOM: F004
+                Located at: Library
+                Category: Library
+
+**case 2**
+
+* program selection: 3 (Search By Name)
+* search input: 'test'
+
+* *expected output:* no entries are found
+* *actual output*: Not found: no facility with name test
+
+**case 3**
+
+* program selection: 4 (Search By Category)
+* search input: 'library'
+
+* *expected output:* search finds all 4 entries
+* *actual output*:
+
+                ===== 4 Facilities in Category "library" =====
+
+                Main Reading Room: F001
+                Located at: Library
+                Category: Library
+
+                Main Reading Room: F002
+                Located at: Library
+                Category: Library
+
+                main reading room: F003
+                Located at: Library
+                Category: Library
+
+                mAIN rEADING rOOM: F004
+                Located at: Library
+                Category: Library
+
+**case 3**
+
+* program selection: 4 (Search By Category)
+* search input: 'test'
+
+* *expected output:* no entries are found
+* *actual output*: Not found: no facility in category test
+
+* **Result: Passed**
 
 # Test Results: Graph and BFS – Rylan Smith
 
@@ -644,7 +728,7 @@ and buildings.txt:
 * **Result: Passed**
 
 
-# Test Results - Madison Lusk - Member C
+# Test Results: Tree, Reports, and Menu - Madison Lusk
 
 ## Department Load Summary
 

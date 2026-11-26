@@ -1,1 +1,4 @@
 F001|Main Reading Room|Library|Library
+F002|Main Reading Room|Library|Library
+F003|main reading room|Library|library
+F004|mAIN rEADING rOOM|Library|lIBRARY
