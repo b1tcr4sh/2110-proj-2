@@ -24,8 +24,8 @@
 * Created Files class to implement helper functions for file parsing and case matching. -- Based on Rylan's file loading code.
 * Implemented main.cpp and handled user input.
 * Created Github repository
-* Contributed to branches: master, facilities, ui, file-loading, makefile, testing
-* Made 30 commits
+* Contributed to branches: master, facilities, ui, file-loading, makefile, testing, linking-with-buildings
+* Made 49 commits
 
 ### Madison Lusk - Member C - Department Tree
 
