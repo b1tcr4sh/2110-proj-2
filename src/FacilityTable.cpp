@@ -56,8 +56,8 @@ void FacilityTable::Load(string filename) { // load the facilities.txt file, pro
         string building = Files::trim(tokens.at(2)); // the trimmed third token
         string category = Files::trim(tokens.at(3)); // the  trimmed forth token
 
-        if (name == "") {
-            cout << "Warning: Facility name is empty: line " << lineNumber << endl;
+        if (name == "" || building == "" || category == "") {
+            cout << "Warning: Entry has empty field: line " << lineNumber << endl;
             rejected++;
             continue;
         }

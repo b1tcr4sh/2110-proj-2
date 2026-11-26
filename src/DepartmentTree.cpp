@@ -46,8 +46,8 @@ void DepartmentTree::Load(string filename) {
         string name = Files::trim(tokens.at(0)); // the first token 
         string parent = Files::trim(tokens.at(1)); // the trimmed second token
 
-        if (name == "") {
-            cout << "Warning: Department name is empty: line " << lineNumber << endl;
+        if (name == "" || parent == "") {
+            cout << "Warning: Entry has empty field: line " << lineNumber << endl;
             rejected++;
             continue;
         }

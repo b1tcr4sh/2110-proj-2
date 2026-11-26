@@ -329,10 +329,10 @@ bool CampusGraph::loadConnections(const string& filename) {
     inputFile.close();
 
     // Show how many connections were added and rejected
-    cout << "===== CONNECTION LOAD SUMMARY =====\n";
+    cout << "\n===== CONNECTION LOAD SUMMARY =====\n";
     cout << "File: " << filename << endl;
     cout << "Connections loaded: " << loaded << endl;
-    cout << "Connections rejected: " << rejected << endl;
+    cout << "Connections rejected: " << rejected << endl << endl;
 
     return true;
 }
