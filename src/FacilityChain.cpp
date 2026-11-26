@@ -3,6 +3,18 @@
 
 #include <iostream>
 #include "../include/FacilityChain.h"
+#include "../include/Files.h"
+
+FacilityChain::~FacilityChain() {
+    Facility* temp = head;
+
+    while (temp != tail) { // loop through all until we find the tail
+        delete temp; // delete
+        temp = temp->next; // and iterate
+    }
+
+    delete temp; // this should now be the tail, so we can delete it too
+}
 
 void FacilityChain::appendToList(Facility* fac) { // append an element to the linked list no questions asked
     if (head != NULL) { // if list already has elements in it,
@@ -78,6 +90,73 @@ Facility* FacilityChain::LinearSearch(string id) { // perform a linear search on
     }
 
     return NULL; // couldn't find, so we return NULL
+}
+
+int FacilityChain::LinearSearchByName(string name, vector<Facility> &found) { // finds based on name; populates found with matches; returns number of matches
+    if (head == NULL) return 0; // if the list is empty, exit early
+
+    int matches = 0;
+    Facility* temp = head;
+
+    while (temp != tail) {
+        if (Files::to_lower(temp->name) == name) { // if the name matches
+            found.push_back(*temp); // then add it to the list
+            matches++; // and increment matches
+        }
+
+        temp = temp->next;
+    }
+
+    if (Files::to_lower(tail->name) == name) { // if the tail matches
+        found.push_back(*tail); // then add it to the list
+        matches++; // and increment matches
+    }
+
+    return matches; // return the number of matches we found
+}
+
+int FacilityChain::LinearSearchByCategory(string category, vector<Facility> &found) { // finds based on category; populates found with matches; returns number of matches
+    if (head == NULL) return 0; // if the list is empty, exit early
+
+    int matches = 0;
+    Facility* temp = head;
+
+    while (temp != tail) {
+        if (Files::to_lower(temp->category) == category) { // if the cat matches
+            found.push_back(*temp); // then add it to the list
+            matches++; // and increment matches
+        }
+
+        temp = temp->next;
+    }
+
+    if (Files::to_lower(tail->category) == category) { // if the tail matches
+        found.push_back(*tail); // then add it to the list
+        matches++; // and increment matches
+    }
+
+    return matches; // return the number of matches we found
+}
+
+int FacilityChain::LinearSearchByCategory(string category) { // find the number of facilities in this chain in a category
+    if (head == NULL) return 0; // if the list is empty, exit early
+
+    int matches = 0;
+    Facility* temp = head;
+
+    while (temp != tail) {
+        if (Files::to_lower(temp->category) == category) { // if the cat matches
+            matches++; // and increment matches
+        }
+
+        temp = temp->next;
+    }
+
+    if (Files::to_lower(tail->category) == category) { // if the tail matches
+        matches++; // and increment matches
+    }
+
+    return matches; // return the number of matches we found
 }
 
 void FacilityChain::ListAll() { // enumerate the list

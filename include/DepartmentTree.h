@@ -19,7 +19,7 @@ class DepartmentTree{
   void preorderTraversal();
 
   private:
-    DepartmentNode* root;
+      DepartmentNode* root = nullptr;
 
     DepartmentNode* SearchAncestors(DepartmentNode* source, string name, stack<DepartmentNode*> &explored);
 };

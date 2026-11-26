@@ -12,7 +12,7 @@ string Files::trim(string input) { // trim whitespace from a string
         size_t start = input.find_first_not_of(" \t\r\n");
 
         if (start == string::npos) { // if the first character is empty (if the string is empty),
-            return NULL; // then return null
+            return ""; // then return null
         }
 
         // otherwise, remove extra spaces from beginning and end of line

@@ -10,6 +10,8 @@
 * Made building names work regardless of capitalization.
 * Added the graph display and statistics, including building degrees and total connections.
 * Implemented BFS to show which buildings can be reached and the distance from the starting building.
+* Added shortest path using BFS to find the shortest route between two buildings.
+* Added a connectivity report showing the number of buildings, connections, highest-degree buildings, isolated buildings, and connected components.
 * Tested the graph and fixed issues found during testing.
 
 ### Rylee Ford - Member A - Facilitie Hash Table
@@ -32,5 +34,5 @@
 * Created and implemented the code for the Department Tree and Node to add and search the departments.
 * Implemented the call cases in the main.cpp for adding, searching, and showing the hierarchy of the department tree.
 * Created the Preorder Traversal code for the Deparment Tree
-*Tested out the Department Tree and Node segements in the main.cpp and fixed any issues it had.
-* Made sure that the duplicates, blank files, blank user inputs, and Unknown Parent were rejected and did not go through 
+* Tested out the Department Tree and Node segements in the main.cpp and fixed any issues it had.
+* Did error testing and fixed Certain issues within the main and department trees

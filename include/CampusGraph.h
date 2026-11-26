@@ -13,6 +13,8 @@ private:
 	vector<vector<int>> adjacencyList;
 
 public:
+	bool buildingExists(string name);
+
 	void addBuilding(const string& buildingID);
 	bool loadBuildings(const string& filename);
 	bool loadConnections(const string& filename);
@@ -20,6 +22,8 @@ public:
 	void displayGraph() const;
 	void displayStatistics() const;
 	void breadthFirstSearch(const string& startBuilding) const;
+	void findShortestPath(const string& startBuilding, const string& destinationBuilding) const;
+	void displayConnectivityReport() const;
 };
 
 #endif

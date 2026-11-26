@@ -3,15 +3,24 @@
 
 #include <fstream>
 #include <iostream>
+#include <random>
 #include <vector>
 #include "../include/FacilityTable.h"
 #include "../include/Files.h"
 
-FacilityTable::FacilityTable(int size) { // basic constructor that defines the number of buckets the table will have
+FacilityTable::FacilityTable(int size, CampusGraph* graph) { // basic constructor that defines the number of buckets the table will have
     this->size = size;
 
     for (int i = 0; i < size; i++) { // fill table with empty chains
         table.push_back(new FacilityChain);
+    }
+
+    this->buildingsGraph = graph;
+}
+
+FacilityTable::~FacilityTable() { // delete all of the stored chains (thus deleting all of the facilities themselves)
+    for (int i = 0; i < size; i++) { // go through each chain
+        delete table.at(i); // and delete it
     }
 }
 
@@ -47,13 +56,13 @@ void FacilityTable::Load(string filename) { // load the facilities.txt file, pro
         string building = Files::trim(tokens.at(2)); // the trimmed third token
         string category = Files::trim(tokens.at(3)); // the  trimmed forth token
 
-        if (name == "") {
-            cout << "Warning: Facility name is empty: line " << lineNumber << endl;
+        if (name == "" || building == "" || category == "") {
+            cout << "Warning: Entry has empty field: line " << lineNumber << endl;
             rejected++;
             continue;
         }
 
-        if (Create(id, name, building, category)) loaded++; // if it is succesfully created and added to the table, then incremend the number of loaded records
+        if (Create(id, name, building, category, lineNumber)) loaded++; // if it is succesfully created and added to the table, then incremend the number of loaded records
         else rejected++; // otherwise, increment the number of rejected records
     }
 
@@ -72,10 +81,10 @@ void FacilityTable::Load(string filename) { // load the facilities.txt file, pro
     cout << "Facility Collisions: " << collisions << endl;
     cout << "Number of Chains: " << size << endl;
     cout << "Number of Facilities Stored: " << total << endl;
-    cout << "Facilities Load Factor: " << LoadFactor() << endl;
+    cout << "Facilities Load Factor: " << LoadFactor() << endl << endl;
 }
 
-Facility FacilityTable::Find(string id) { // search for a key in a bucket by hashing it, then searching the bucket to find the entry
+Facility FacilityTable::FindByID(string id) { // search for a key in a bucket by hashing it, then searching the bucket to find the entry
     id = normalize(id); // normalize the key
 
     if (!isValid(id)) { // if the key is formatted incorrectly,
@@ -87,18 +96,78 @@ Facility FacilityTable::Find(string id) { // search for a key in a bucket by has
     Facility* fac = bucket->LinearSearch(id); // search the bucket to find the element
 
     if (fac == NULL) { // if it wasn't found in bucket
-        // cout << "Not found: no facility with ID " << id << endl;
         return Facility("null", "null", "null", "null"); // then exit
     }
 
     return *fac; // otherwise, return a copy of it
 }
 
-bool FacilityTable::Create(string id, string name, string building, string category) { // create a facility entry and insert it into the chain
+int FacilityTable::FindByName(string name, vector<Facility> &found) {// find a all facilities with a name; has to be a linear search through the entire tabler; returns copies so we don't break the hash table
+    name = Files::to_lower(name); // lowercase the name for matching
+    int matches = 0;
+
+    for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
+        FacilityChain* chain = table.at(i);
+        if (chain == NULL) { // if chain is not initialized
+            continue; // then skip it
+        }
+        matches += chain->LinearSearchByName(name, found); // increase matches by the amount found and append all the matches from the chain
+    }
+
+    return matches; // return the number of matches we found
+}
+int FacilityTable::FindByCategory(string category, vector<Facility> &found) {// find all facilities in a category; has to be a linear search through the entire table; returns copies so we don't break the hash table
+    category = Files::to_lower(category); // lowercase the category for matching
+    int matches = 0;
+
+    for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
+        FacilityChain* chain = table.at(i);
+        if (chain == NULL) { // if chain is not initialized
+            continue; // then skip it
+        }
+        matches += chain->LinearSearchByCategory(category, found); // increase matches by the amount found and append all the matches from the chain
+    }
+
+    return matches; // return the number of matches we found
+}
+
+int FacilityTable::FindByCategory(string category) {  // find the number of facilities in a category
+    category = Files::to_lower(category); // lowercase the category for matching
+    int matches = 0;
+
+    for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
+        FacilityChain* chain = table.at(i);
+        if (chain == NULL) { // if chain is not initialized
+            continue; // then skip it
+        }
+        matches += chain->LinearSearchByCategory(category); // increase matches by the amount found
+    }
+
+    return matches; // return the number of matches we found
+}
+
+bool FacilityTable::Create(string id, string name, string building, string category, int lineNumber) { // create a facility entry and insert it into the chain
     id = normalize(id); // normalize the key
 
     if (!isValid(id)) { // if the format of the id is invalid,
         return false; // then exit early and state rejection
+    }
+
+    bool categoryExists = false;
+    for (int i = 0; i < (int) categories.size(); i++) { // look through all stored categories
+        if (Files::to_lower(categories.at(i)) == Files::to_lower(category)) { // if some variation of the capatilization of this category already exists
+            category = categories.at(i); // then set the category to be that capitalization
+            categoryExists = true;
+        }
+    }
+
+    if (!categoryExists) { // otherwise
+        categories.push_back(category); // add this category to the list
+    }
+
+    if (!buildingsGraph->buildingExists(building)) { // if the building doesn't exist
+        cout << "Building does not exist: " << building << ": line: " << lineNumber << endl; // then print an error
+        return false; // and return early and state rejection
     }
 
     Facility* newFac = new Facility(id, name, building, category);
@@ -106,11 +175,12 @@ bool FacilityTable::Create(string id, string name, string building, string categ
     FacilityChain* bucket = hash(newFac->id); // hash the key and get the bucket to append into
     
     if (bucket->LinearSearch(id) != NULL) { // if this bucket already contains this id
-        cout << "Duplicate facility id: " << id << endl; // then print an error 
+        cout << "Duplicate facility id: " << id << ": line: " << lineNumber << endl; // then print an error 
         return false; // and return early and state rejection
     }
     
     bucket->appendToList(newFac); // append to bucket
+    total++;
     return true;
 }
 
@@ -120,6 +190,7 @@ void FacilityTable::Remove(string id) { // remove an entry from the table
 
     Facility* fac = bucket->LinearSearch(id); // find the correct element in the bucket
     bucket->removeFromList(fac); // and remove it
+    total--;
 }
 
 FacilityChain* FacilityTable::hash(string id) { // hashing wrapper function that gets the index of the hashed key and returns a reference to the appropriate chain
@@ -149,7 +220,7 @@ void FacilityTable::ListAll() { // iterate through each chain in the table and p
     for (unsigned int i = 0; i < table.size(); i++) { // go through each bucket
         FacilityChain* chain = table.at(i);
         if (chain == NULL) {
-            cout << "chain uninitialized.." << endl;
+            // cout << "chain uninitialized.." << endl;
             return;
         }
         chain->ListAll(); // and list it
@@ -183,4 +254,8 @@ float FacilityTable::LoadFactor() { // computes and returns the current load fac
     }
 
     return (float) sum / (float) size; 
+}
+
+int FacilityTable::getTotal() {
+    return total;
 }

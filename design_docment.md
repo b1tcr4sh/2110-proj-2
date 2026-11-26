@@ -1,4 +1,4 @@
-# Campus Graph (Rylan Smith - Member B)
+# Campus Graph 
 
 The campus graph represents the buildings on campus and each connection between them. Every building is a vertex, and each connection is an edge.
 
@@ -9,6 +9,10 @@ The graph loads buildings and connections from buildings.txt and connections.txt
 Each building and connection is displayed with the graph. The total number of buildings, total connections, and the degree of each building are also displayed.
 
 A breadth-first search (BFS) is implemented to find which buildings can be reached from a starting building. A queue is used to visit connected buildings and track visited buildings and distances from the starting point.
+
+A shortest-path search is also implemented using BFS to find the shortest route between two buildings. The program keeps track of where each building was reached from so it can rebuild and display the shortest path. It also displays the number of connections needed to reach the destination.
+
+A connectivity report is implemented to show additional information about the campus graph. It displays the total number of buildings and connections, the building or buildings with the highest degree, and any isolated buildings. It also uses BFS to count the number of connected components in the graph.
 
 # Facility Hash Table
 
