@@ -6,6 +6,7 @@
 #include <fstream>
 #include <algorithm>
 #include <cctype>
+#include <queue>
 
 using namespace std;
 string departmentToLowerCase(string text) {
@@ -38,7 +39,7 @@ void DepartmentTree::Load(string filename) {
             continue; // skip it
         }
 
-        if (tokens.size() != 2) { // if there are not 2 tokens, the formatting is incorrect
+        if (tokens.size() != 2) { // if there are not 4 tokens, the formatting is incorrect
             cout << "Malformed Line: " << filename << " line " << lineNumber << ": incorrect number or format of tokens." << endl;
             continue; // skip it
         }
@@ -46,8 +47,8 @@ void DepartmentTree::Load(string filename) {
         string name = Files::trim(tokens.at(0)); // the first token 
         string parent = Files::trim(tokens.at(1)); // the trimmed second token
 
-        if (name == "" || parent == "") {
-            cout << "Warning: Entry has empty field: line " << lineNumber << endl;
+        if (name == "") {
+            cout << "Warning: Department name is empty: line " << lineNumber << endl;
             rejected++;
             continue;
         }
@@ -235,3 +236,64 @@ void DepartmentTree::preorderTraversal() {
 
     cout << "End of Preorder Traversal." << endl << endl;
 }
+
+// post order traversal of the department tree with a DFS
+
+void DepartmentTree::postorderTraversal() {
+    if (root == nullptr) {
+        cout << "Department tree is empty." << endl;
+        return; 
+    }
+
+    cout << "Postorder Traversal:" << endl;
+
+    stack<DepartmentNode*> nodes;
+    stack<DepartmentNode*> output;
+    nodes.push(root);
+    output.push(root);
+
+    while (!nodes.empty()) {
+        DepartmentNode* current = nodes.top();
+        nodes.pop();
+        output.push(current);
+
+        for (int i = 0; i < current->children.size(); i++) {
+            nodes.push(current->children[i]);
+        }
+    }
+
+    while (!output.empty()) {
+        cout << "- " << output.top()->name << endl;
+        output.pop();
+    }
+    cout << "End of Postorder Traversal." << endl << endl;
+}
+
+// level order traversal of the department tree with a BFS
+
+void DepartmentTree::LevelOrderTraversal() {
+    if (root == nullptr) {
+        cout << "Department tree is empty." << endl;
+        return; 
+    }
+
+    cout << "Level Order Traversal:" << endl;
+
+    queue<DepartmentNode*> nodes;
+    nodes.push(root);
+
+    while (!nodes.empty()) {
+        DepartmentNode* current = nodes.front();
+        nodes.pop();
+
+        cout << "- " << current->name << endl;
+
+        for (int i = 0; i < current->children.size(); i++) {
+            nodes.push(current->children[i]);
+        }
+    }
+
+    cout << "End of Level Order Traversal." << endl << endl;
+}
+
+// Department Stats 
