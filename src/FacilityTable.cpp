@@ -78,6 +78,7 @@ void FacilityTable::Load(string filename) { // load the facilities.txt file, pro
         collisions += chain->NumCollisions(); // add the number of collisions 
         total += chain->Size(); // add the size of the chain
     }
+    cout << "==== COLLISION DIAGNOSTIC ====" << endl;
     cout << "Facility Collisions: " << collisions << endl;
     cout << "Number of Chains: " << size << endl;
     cout << "Number of Facilities Stored: " << total << endl;
