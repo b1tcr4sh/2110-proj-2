@@ -519,7 +519,6 @@ and buildings.txt:
 
 
 
-
 # Test Results - Madison Lusk - Member C
 
 ## Department Load Summary
@@ -615,18 +614,30 @@ and buildings.txt:
 
 * Department Statistics with a root-only tree:
 
-        ======== Department Statisitcs ========
-        Total Departments: 1
-        Leaf Departments: 1
-        Tree height: 0
+        # DepartmentName|ParentName
+        University|NONE
+
+         ======== Department Statisitcs ========
+                Total Departments: 1
+                Leaf Departments: 1
+                Tree height: 0
 
 * **results: passed**
 
 * Department Statisitcs with the sample tree:
 
+        # DepartmentName|ParentName
+        University|NONE
+        College of Engineering|University
+        College of Science|University
+        Computer Science|College of Engineering
+        Electrical Engineering|College Of Engineering
+        Mathematics|College of Science
+        Physics|College of Science
+
          ======== Department Statistics ========
-         Total Department: 7
-         Leaf Departments: 4
-         Tree Height: 2
+        Total Department: 7
+        Leaf Departments: 4
+        Tree Height: 2
 
 * **results: passed**
