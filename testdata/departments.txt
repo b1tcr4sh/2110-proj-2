@@ -1,5 +1,5 @@
 # DepartmentName|ParentName
-University
+University|NONE
 College of Engineering
 College of Science
 Computer Science
