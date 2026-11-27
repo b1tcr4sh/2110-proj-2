@@ -318,7 +318,7 @@ void DepartmentTree::DepartmentStatistics() {
 
         // stack present to hold the department nodes and their depth within the tree.
         stack<pair<DepartmentNode*, int>> nodes; 
-        nodes.push({root, 1}); // push the root department node and its depth (1) onto the stack.
+        nodes.push({root, 0}); // push the root department node and its depth (0) onto the stack.
 
         while (!nodes.empty()) {
             auto current = nodes.top(); // get the current department node and its depth.
