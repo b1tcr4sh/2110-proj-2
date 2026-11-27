@@ -524,7 +524,12 @@ and buildings.txt:
 ## Department Load Summary
 
 * loaded from departments from `departments.txt`
-* 8 Departments loaded and 0 rejected
+* 7 Departments loaded and 0 rejected
+
+        ==== DEPARTMENT LOAD SUMMARY ====
+        File: testdata/departments.txt
+        Departments loaded: 7
+        Departments rejected: 0
 
    * **Results: passed**
 
