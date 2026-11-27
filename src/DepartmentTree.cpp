@@ -210,7 +210,7 @@ void DepartmentTree::displayDepartmentHierarchy() {
         }
     }
 
-    cout << "End of Department Hierarchy." << endl << endl;
+    cout << "End of Department Hierarchy." << endl;
 }
 
 // performing preorder traversal of the department tree with a DFS
@@ -296,7 +296,7 @@ void DepartmentTree::LevelOrderTraversal() {
         }
     }
 
-    cout << "End of Level Order Traversal." << endl << endl;
+    cout << "End of Level Order Traversal." << endl;
 }
 
 // Department Statistics 
@@ -341,7 +341,4 @@ void DepartmentTree::DepartmentStatistics() {
     cout << "Total Departments: " << totalDepartments << endl;
     cout << "Leaf Departments: " << leafDepartments << endl;
     cout << "Tree height: " << treeHeight << endl;
-}
-    cout << "End of Department Statistics." << endl << endl;
-
 }
