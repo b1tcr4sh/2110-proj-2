@@ -1,8 +1,2 @@
 # DepartmentName|ParentName
 University|NONE
-College of Engineering
-College of Science
-Computer Science
-Electrical Engineering
-Mathematics
-Physics
