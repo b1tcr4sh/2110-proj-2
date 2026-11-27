@@ -541,9 +541,14 @@ and buildings.txt:
 * Ran the code that would place each department in it's pre order position
 * No issues arised in the sorting
 
-
-
-
+        Preorder Traversal:
+        - University
+        - College of Engineering
+        - Computer Science
+        - Electrical Engineering
+        - College of Science
+        - Mathmatics
+        - Physics
 
  * **Results: passed**
 
@@ -583,7 +588,6 @@ and buildings.txt:
         - College of Science
         - University
 
-
 * **results: passed**
 
 * Level-Order Traversal Output
@@ -599,8 +603,23 @@ and buildings.txt:
 
 * **results: passed**
 
-## Category report with capitalization differences and with no facilities; connectivity report with an isolated building and with a tie for highest degree.
 
-* testing goes here part two.
+* Department Statistics with an empty tree
 
-* **results: insert answer here**
+        No departments are loaded.
+        Total departments: 0
+        Leaf departments: 0
+        Tree height: N/A
+
+* **results: passed**
+
+* Department Statistics with a root-only tree
+
+* Department Statisitcs with the sample tree:
+
+         ======== Department Statistics ========
+         Total Department: 7
+         Leaf Departments: 4
+         Tree Height: 3
+
+* **results: passed**
