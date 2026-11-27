@@ -604,7 +604,7 @@ and buildings.txt:
 * **results: passed**
 
 
-* Department Statistics with an empty tree
+* Department Statistics with an empty tree:
 
         No departments are loaded.
         Total departments: 0
@@ -613,7 +613,7 @@ and buildings.txt:
 
 * **results: passed**
 
-* Department Statistics with a root-only tree
+* Department Statistics with a root-only tree:
 
 * Department Statisitcs with the sample tree:
 
