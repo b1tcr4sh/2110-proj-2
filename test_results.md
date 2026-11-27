@@ -620,6 +620,6 @@ and buildings.txt:
          ======== Department Statistics ========
          Total Department: 7
          Leaf Departments: 4
-         Tree Height: 3
+         Tree Height: 2
 
 * **results: passed**
