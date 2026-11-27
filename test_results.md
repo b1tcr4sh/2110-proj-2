@@ -615,6 +615,13 @@ and buildings.txt:
 
 * Department Statistics with a root-only tree:
 
+        ======== Department Statisitcs ========
+        Total Departments: 1
+        Leaf Departments: 1
+        Tree height: 0
+
+* **results: passed**
+
 * Department Statisitcs with the sample tree:
 
          ======== Department Statistics ========
