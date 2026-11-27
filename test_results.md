@@ -540,6 +540,11 @@ and buildings.txt:
 
 * Ran the code that would place each department in it's pre order position
 * No issues arised in the sorting
+
+
+
+
+
  * **Results: passed**
 
 ## Add Department with unknown parent or duplicate name
@@ -564,3 +569,38 @@ and buildings.txt:
         10. Exit
 
     * **results: passed**    
+
+## Postorder and level-order traversals; department statistics for an empty tree, a root-only tree, and the sample tree.
+
+* Postorder Traversal Output
+
+        Postorder Traversal:
+        - Computer Science
+        - Electrical Engineering
+        - College of Engineering
+        - Mathmaticas
+        - Physics
+        - College of Science
+        - University
+
+
+* **results: passed**
+
+* Level-Order Traversal Output
+
+        Level-Order Traversal:
+        - University
+        - College of Engineering
+        - College of Science
+        - Computer Science
+        - Electrical Engineering
+        - Mathematics
+        - Physics
+
+* **results: passed**
+
+## Category report with capitalization differences and with no facilities; connectivity report with an isolated building and with a tie for highest degree.
+
+* testing goes here part two.
+
+* **results: insert answer here**
