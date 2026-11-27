@@ -272,7 +272,6 @@ bool HandleInut(string inputStr) { // take in raw input, process it, and handle 
             DepartmentTrees.LevelOrderTraversal();
             return true;
         case 15: // department statistics
-            DepartmentTrees.DepartmentStatistics();
             return true;
         case 16: // Facility category report
             categoryReport();

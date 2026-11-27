@@ -178,6 +178,8 @@ DepartmentNode* DepartmentTree::SearchAncestors(DepartmentNode* source, string n
 }
 
 // displaying the hierarchy for the departments
+// * need to dsiplay the hierarchy on a seperate line each time, using indentations for each length
+
     
 void DepartmentTree::displayDepartmentHierarchy() {
     if (root == nullptr) {
@@ -210,7 +212,9 @@ void DepartmentTree::displayDepartmentHierarchy() {
 
     cout << "End of Department Hierarchy." << endl << endl;
 }
+
 // performing preorder traversal of the department tree with a DFS
+// ** Display the departments in pre order traversal order but as a sequence. 
 
 void DepartmentTree::preorderTraversal() {
     if (root == nullptr) {
@@ -250,14 +254,13 @@ void DepartmentTree::postorderTraversal() {
     stack<DepartmentNode*> nodes;
     stack<DepartmentNode*> output;
     nodes.push(root);
-    output.push(root);
 
     while (!nodes.empty()) {
         DepartmentNode* current = nodes.top();
         nodes.pop();
         output.push(current);
 
-        for (int i = 0; i < current->children.size(); i++) {
+        for (size_t i = 0; i < current->children.size(); i++) {
             nodes.push(current->children[i]);
         }
     }
@@ -288,7 +291,7 @@ void DepartmentTree::LevelOrderTraversal() {
 
         cout << "- " << current->name << endl;
 
-        for (int i = 0; i < current->children.size(); i++) {
+        for (size_t i = 0; i < current->children.size(); i++) {
             nodes.push(current->children[i]);
         }
     }
