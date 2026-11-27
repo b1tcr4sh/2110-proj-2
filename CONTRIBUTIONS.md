@@ -37,6 +37,6 @@
 * Tested out the Department Tree and Node segements in the main.cpp and fixed any issues it had.
 * Did error testing and fixed Certain issues within the main and department trees
 * Implemented the Post order and Level order traversal segments to the department tree.cpp
-* Worked on the Department Statistics
-* Fixed up the Display Department hierarchy with each department being shown on seperate lines
+* Created Department Statistics to print out the needed details
+* edited Display Department hierarchy with each department being shown on seperate lines
 * edited the pre order traversal to be in a sequence order rather than in indentation

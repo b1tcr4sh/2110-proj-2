@@ -6,11 +6,11 @@
 #include <stack>
 #include "DepartmentNode.h"
 
-// functions for the department tree, department statistics, pre order traversal, and department hierarchy.
+// functions for the department tree, department statistics, pre order traversal, post order traversal, and level-order traversal and department hierarchy.
 
 using namespace std;
 
-class DepartmentTree{
+class DepartmentTree {
   public:
   void Load(string filename); 
   DepartmentNode* addDepartment(DepartmentNode* parent, string name);
@@ -19,7 +19,7 @@ class DepartmentTree{
   void preorderTraversal();
   void postorderTraversal();
   void LevelOrderTraversal();
-
+  void DepartmentStatistics();
 
   private:
       DepartmentNode* root = nullptr;

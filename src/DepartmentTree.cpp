@@ -299,4 +299,38 @@ void DepartmentTree::LevelOrderTraversal() {
     cout << "End of Level Order Traversal." << endl << endl;
 }
 
-// Department Stats 
+// Department Statistics 
+
+void DepartmentTree::DepartmentStatistics() {
+    if (root == nullptr) {
+        cout << "Department tree is empty." << endl;
+        return;
+    }
+
+        int totalDepartments = 0;
+        int totalDepth = 0;
+
+        stack<pair<DepartmentNode*, int>> nodes;
+        nodes.push({root, 1});
+
+        while (!nodes.empty()) {
+            auto current = nodes.top();
+            nodes.pop();
+
+            DepartmentNode* department = current.first;
+            int depth = current.second;
+
+            totalDepartments++;
+            totalDepth += depth;
+
+            for (int i = department->children.size() - 1; i >= 0; i--) {
+                nodes.push({department->children[i], depth + 1});
+            }
+        }
+
+
+    cout << "Department Statistics:" << endl;
+    cout << "Total Departments: " << totalDepartments << endl;
+    cout << "The total Depth level: " << totalDepth << endl;
+
+}
