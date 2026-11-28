@@ -381,7 +381,6 @@ and buildings.txt:
 *  **Result: Passed**
 
 ## A file with Windows line endings, extra whitespace around fields, a lowercase ID in a data file, and a # inside a name.
-
 * tested with buildings.txt (with windows line endings):
 
         Library
@@ -733,7 +732,12 @@ and buildings.txt:
 ## Department Load Summary
 
 * loaded from departments from `departments.txt`
-* 8 Departments loaded and 0 rejected
+* 7 Departments loaded and 0 rejected
+
+        ==== DEPARTMENT LOAD SUMMARY ====
+        File: testdata/departments.txt
+        Departments loaded: 7
+        Departments rejected: 0
 
    * **Results: passed**
 
@@ -748,6 +752,16 @@ and buildings.txt:
 
 * Ran the code that would place each department in it's pre order position
 * No issues arised in the sorting
+
+        Preorder Traversal:
+        - University
+        - College of Engineering
+        - Computer Science
+        - Electrical Engineering
+        - College of Science
+        - Mathmatics
+        - Physics
+
  * **Results: passed**
 
 ## Add Department with unknown parent or duplicate name
@@ -772,3 +786,71 @@ and buildings.txt:
         10. Exit
 
     * **results: passed**    
+
+## Postorder and level-order traversals; department statistics for an empty tree, a root-only tree, and the sample tree.
+
+* Postorder Traversal Output
+
+        Postorder Traversal:
+        - Computer Science
+        - Electrical Engineering
+        - College of Engineering
+        - Mathmaticas
+        - Physics
+        - College of Science
+        - University
+
+* **results: passed**
+
+* Level-Order Traversal Output
+
+        Level-Order Traversal:
+        - University
+        - College of Engineering
+        - College of Science
+        - Computer Science
+        - Electrical Engineering
+        - Mathematics
+        - Physics
+
+* **results: passed**
+
+
+* Department Statistics with an empty tree:
+
+        No departments are loaded.
+        Total departments: 0
+        Leaf departments: 0
+        Tree height: N/A
+
+* **results: passed**
+
+* Department Statistics with a root-only tree:
+
+        # DepartmentName|ParentName
+        University|NONE
+
+         ======== Department Statisitcs ========
+                Total Departments: 1
+                Leaf Departments: 1
+                Tree height: 0
+
+* **results: passed**
+
+* Department Statisitcs with the sample tree:
+
+        # DepartmentName|ParentName
+        University|NONE
+        College of Engineering|University
+        College of Science|University
+        Computer Science|College of Engineering
+        Electrical Engineering|College Of Engineering
+        Mathematics|College of Science
+        Physics|College of Science
+
+         ======== Department Statistics ========
+        Total Department: 7
+        Leaf Departments: 4
+        Tree Height: 2
+
+* **results: passed**

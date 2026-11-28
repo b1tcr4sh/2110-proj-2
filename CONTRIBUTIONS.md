@@ -36,3 +36,8 @@
 * Created the Preorder Traversal code for the Deparment Tree
 * Tested out the Department Tree and Node segements in the main.cpp and fixed any issues it had.
 * Did error testing and fixed Certain issues within the main and department trees
+* Implemented the Post order and Level order traversal segments to the department tree.cpp
+* Created Department Statistics to print out the total departments, the leaf departments, and the tree height overall
+* edited Display Department hierarchy with each department being shown on seperate lines
+* edited the pre order traversal to be in a sequence order rather than in indentation
+* Tested for the post order and level order traversals. Tested with an empty tree, root only, and full tree examples

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <algorithm>
 #include <cctype>
+#include <queue>
 
 using namespace std;
 string departmentToLowerCase(string text) {
@@ -46,8 +47,8 @@ void DepartmentTree::Load(string filename) {
         string name = Files::trim(tokens.at(0)); // the first token 
         string parent = Files::trim(tokens.at(1)); // the trimmed second token
 
-        if (name == "" || parent == "") {
-            cout << "Warning: Entry has empty field: line " << lineNumber << endl;
+        if (name == "") {
+            cout << "Warning: Department name is empty: line " << lineNumber << endl;
             rejected++;
             continue;
         }
@@ -177,6 +178,7 @@ DepartmentNode* DepartmentTree::SearchAncestors(DepartmentNode* source, string n
 }
 
 // displaying the hierarchy for the departments
+// * need to dsiplay the hierarchy on a seperate line each time, using indentations for each length
     
 void DepartmentTree::displayDepartmentHierarchy() {
     if (root == nullptr) {
@@ -195,6 +197,8 @@ void DepartmentTree::displayDepartmentHierarchy() {
 
         DepartmentNode* department = current.first;
         int level = current.second;
+        
+        // print indentation based on the level of the department in the hierarchy
 
         for (int i = 0; i < level; i++) {
             cout << "    ";
@@ -207,9 +211,11 @@ void DepartmentTree::displayDepartmentHierarchy() {
         }
     }
 
-    cout << "End of Department Hierarchy." << endl << endl;
+    cout << "End of Department Hierarchy." << endl;
 }
+
 // performing preorder traversal of the department tree with a DFS
+// ** Display the departments in pre order traversal order but as a sequence. 
 
 void DepartmentTree::preorderTraversal() {
     if (root == nullptr) {
@@ -223,15 +229,123 @@ void DepartmentTree::preorderTraversal() {
     nodes.push(root);
 
     while (!nodes.empty()) {
-        DepartmentNode* current = nodes.top();
-        nodes.pop();
+        DepartmentNode* current = nodes.top(); // get the top node of the stack.
+        nodes.pop(); // pop the top node off the stack.
 
-        cout << "- " << current->name << endl;
+        // ** Displaying the departments in pre order traversal order but as a sequence.
 
-        for (int i = current->children.size() - 1; i >= 0; i--) {
+        cout << " -> " << current->name;
+
+        for (int i = current->children.size() - 1; i >= 0; i--) { // iterate through the children of the current department node in reverse order.
             nodes.push(current->children[i]);
         }
     }
 
+    cout << endl;
     cout << "End of Preorder Traversal." << endl << endl;
+}
+
+// post order traversal of the department tree with a DFS
+
+void DepartmentTree::postorderTraversal() {
+    if (root == nullptr) {
+        cout << "Department tree is empty." << endl;
+        return; 
+    }
+
+    cout << "Postorder Traversal:" << endl;
+
+    stack<DepartmentNode*> nodes; // stack to hold department nodes.
+    stack<DepartmentNode*> output; // stack to hold the output for the nodes.
+    nodes.push(root); // push root department node onto the nodes stack.
+
+    while (!nodes.empty()) {
+        DepartmentNode* current = nodes.top(); // get the top node of the nodes stack.
+        nodes.pop(); // pop top node off the nodes stack.
+        output.push(current); // push current department node onto the output stack.
+
+        for (size_t i = 0; i < current->children.size(); i++) { // for each child of the current department node.
+            nodes.push(current->children[i]); // push each child onto the nodes stack.
+        }
+    }
+
+    while (!output.empty()) {
+        cout << "- " << output.top()->name << endl; // print name of department at thr top of the output
+        output.pop(); // pop the department off the output
+    }
+    cout << "End of Postorder Traversal." << endl << endl;
+}
+
+// level order traversal of the department tree with a BFS
+
+void DepartmentTree::LevelOrderTraversal() {
+    if (root == nullptr) {
+        cout << "Department tree is empty." << endl;
+        return; 
+    }
+
+    cout << "Level Order Traversal:" << endl;
+
+    queue<DepartmentNode*> nodes; // queue to hold department nodes for level order traversal.
+    nodes.push(root); // push the root department node onto the queue.
+
+    while (!nodes.empty()) {
+        DepartmentNode* current = nodes.front(); // get the front node of the queue.
+        nodes.pop();
+
+        cout << "- " << current->name << endl; // print the name of the current department node.
+
+        for (size_t i = 0; i < current->children.size(); i++) { // for each child of the current department node.
+            nodes.push(current->children[i]);
+        }
+    }
+
+    cout << "End of Level Order Traversal." << endl;
+}
+
+// Department Statistics for the total depertments, leaf departments, and tree height.
+
+void DepartmentTree::DepartmentStatistics() {
+    if (root == nullptr) {
+        cout << "No departments are loaded." << endl;
+        cout << "Total departments: 0" << endl;
+        cout << "Leaf departments: 0" << endl;
+        cout << "Tree height: N/A" << endl;
+        return;
+    }
+
+        int totalDepartments = 0;
+        int leafDepartments = 0;
+        int treeHeight = 0;
+
+        // stack present to hold the department nodes and their depth within the tree.
+        stack<pair<DepartmentNode*, int>> nodes; 
+        nodes.push({root, 0}); // push the root department node and its depth (0) onto the stack.
+
+        while (!nodes.empty()) {
+            auto current = nodes.top(); // get the current department node and its depth.
+            nodes.pop(); // pop current node and its depth off the stack.
+
+            // the current department node and its depth and the depth of the current department node.
+            DepartmentNode* department = current.first; 
+            int depth = current.second;
+
+            totalDepartments++;
+
+            // if the current department has no children within it, it classifes as a leaf node.
+            if (department->children.empty()) { 
+                leafDepartments++; // increases by 1 if department classfies as a leaf node.
+            }
+            treeHeight = max(treeHeight, depth); // update the tree height if the current depth is greater than the previous max depth.
+
+            for (int i = department->children.size() - 1; i >= 0; i--) { // iterate through the children of the current department node in reverse order.
+                nodes.push({department->children[i], depth + 1}); // push each child department node and its depth onto the stack.
+            }
+        }
+
+
+    cout << "======= Department Statistics =======" << endl;
+    cout << "Total Departments: " << totalDepartments << endl;
+    cout << "Leaf Departments: " << leafDepartments << endl;
+    cout << "Tree height: " << treeHeight << endl;
 }

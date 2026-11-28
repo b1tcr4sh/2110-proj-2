@@ -3,7 +3,6 @@ University|NONE
 College of Engineering|University
 College of Science|University
 Computer Science|College of Engineering
-Electrical Engineering|College of Engineering
+Electrical Engineering|College Of Engineering
 Mathematics|College of Science
-Physics|College of Science
 Physics|College of Science
