@@ -1,4 +1,4 @@
-### Rylan Smith - Member B – Campus Graph
+# Rylan Smith - Member B – Campus Graph
 
 **Files** `CampusGraph.h`, `CampusGraph.cpp`
 
@@ -14,7 +14,7 @@
 * Added a connectivity report showing the number of buildings, connections, highest-degree buildings, isolated buildings, and connected components.
 * Tested the graph and fixed issues found during testing.
 
-### Rylee Ford - Member A - Facilitie Hash Table
+# Rylee Ford - Member A - Facilitie Hash Table
 
 **Files** `FacilityTable.h`, `FacilityTable.cpp`, `FacilityChain.h`, `FacilityChain.cpp`, `Facility.h`, `Facility.cpp`, `Files.h`, `Files.cpp`, `main.cpp`
 
@@ -27,7 +27,7 @@
 * Contributed to branches: master, facilities, ui, file-loading, makefile, testing, linking-with-buildings
 * Made 49 commits
 
-### Madison Lusk - Member C - Department Tree
+# Madison Lusk - Member C - Department Tree
 
 **Files** `DepartmentTree.h`, `DepartmentTree.cpp`, `DepartmentNode.h`, `DepartmentNode.cpp`
 
@@ -41,3 +41,7 @@
 * edited Display Department hierarchy with each department being shown on seperate lines
 * edited the pre order traversal to be in a sequence order rather than in indentation
 * Tested for the post order and level order traversals. Tested with an empty tree, root only, and full tree examples
+
+# Code Review - Rylee Ford and Madison Lusk
+
+Madison contributed to the `Member-C` branch and when she was done implementing it's functionality, I opened a pull request (https://github.com/b1tcr4sh/2110-proj-2/pull/1) that we used to merge it. There are documented comments of me reviewing her code before merging and asking for her confirmation after merging.
