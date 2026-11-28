@@ -257,12 +257,12 @@ void DepartmentTree::postorderTraversal() {
 
     stack<DepartmentNode*> nodes; // stack to hold department nodes.
     stack<DepartmentNode*> output; // stack to hold the output for the nodes.
-    nodes.push(root);
+    nodes.push(root); // push root department node onto the nodes stack.
 
     while (!nodes.empty()) {
-        DepartmentNode* current = nodes.top();
-        nodes.pop();
-        output.push(current);
+        DepartmentNode* current = nodes.top(); // get the top node of the nodes stack.
+        nodes.pop(); // pop top node off the nodes stack.
+        output.push(current); // push current department node onto the output stack.
 
         for (size_t i = 0; i < current->children.size(); i++) { // for each child of the current department node.
             nodes.push(current->children[i]); // push each child onto the nodes stack.
