@@ -233,11 +233,8 @@ void DepartmentTree::preorderTraversal() {
         nodes.pop(); // pop the top node off the stack.
 
         // ** Displaying the departments in pre order traversal order but as a sequence.
-        // print out things in sequence form here 
 
-        for (size_t i = 0; i < current->children.size(); i++) {
-            cout << current->name << " -> "; // print the name of the current department node.
-        }
+        cout << " -> " << current->name;
 
         for (int i = current->children.size() - 1; i >= 0; i--) { // iterate through the children of the current department node in reverse order.
             nodes.push(current->children[i]);
@@ -273,8 +270,8 @@ void DepartmentTree::postorderTraversal() {
     }
 
     while (!output.empty()) {
-        cout << "- " << output.top()->name << endl;
-        output.pop();
+        cout << "- " << output.top()->name << endl; // print name of department at thr top of the output
+        output.pop(); // pop the department off the output
     }
     cout << "End of Postorder Traversal." << endl << endl;
 }
@@ -289,8 +286,8 @@ void DepartmentTree::LevelOrderTraversal() {
 
     cout << "Level Order Traversal:" << endl;
 
-    queue<DepartmentNode*> nodes;
-    nodes.push(root);
+    queue<DepartmentNode*> nodes; // queue to hold department nodes for level order traversal.
+    nodes.push(root); // push the root department node onto the queue.
 
     while (!nodes.empty()) {
         DepartmentNode* current = nodes.front(); // get the front node of the queue.
