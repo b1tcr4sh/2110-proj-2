@@ -235,9 +235,9 @@ void DepartmentTree::preorderTraversal() {
         // ** Displaying the departments in pre order traversal order but as a sequence.
         // print out things in sequence form here 
 
-        for (size_t i = 0; i < current->name.size(); i++) {
-            cout << current->name;
-            if (i < current->name.size() - 1) {
+        for (size_t i = 0; i < current->children.size(); i++) {
+            cout << current->children[i]->name;
+            if (i < current->children.size() - 1) {
                 cout << " -> ";
             }
         }
